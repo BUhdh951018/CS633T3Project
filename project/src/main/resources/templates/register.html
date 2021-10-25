@@ -2,20 +2,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Register</title>
+  <title>Create your account</title>
+  <object th:include="fragments/header::header" th:remove="tag"></object>
 </head>
 <body>
-  <div>
-    <form th:action="@{/register}" method="post">
-      Username: <input type="text" id="username" name="username"> <br/>
-      Password: <input type="text" id="password" name="password"> <br/>
-      Confirm Password: <input type="text"> <br/>
-      Email: <input type="text" id="email" name="email"> <br/>
-      Birthday: <input type="date" id="birth" name="birth"> <br/>
-      Phone: <input type="text" id="phone" name="phone"> <br/>
-      Label: <input type="text" id="label" name="label"> <br/>
-      <button type="submit">Submit</button>
-    </form>
+  <div class="container-fluid register-out">
+    <div class="row back register">
+      <div class="col-md-4">
+        <div class="left-div">
+          <p class="first-p">
+            Welcome to <br/>
+            TrackTastic.com<br/>
+          </p>
+          <p class="second-p">
+            Let's get started wirg a few<br/>
+            simple steps!
+          </p>
+        </div>
+      </div>
+      <div class="col-md-8 right-div">
+        <p class="text-center title-register">Create Account</p>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <form th:action="@{/register}" method="post">
+              <div class="mb-3">
+                <input type="text" class="form-control input-change" id="username" name="username" placeholder="username">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control input-change" id="password" name="password" placeholder="password">
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control input-change" id="email" name="email" placeholder="email">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control input-change" id="birth" name="birth" placeholder="birthday">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control input-change" id="phone" name="phone" placeholder="phone">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control input-change" id="label" name="label" placeholder="label">
+              </div>
+              <button type="submit" class="btn login-btn register-btn">Login now</button> <br/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

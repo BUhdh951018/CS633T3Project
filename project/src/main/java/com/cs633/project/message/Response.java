@@ -1,7 +1,7 @@
 package com.cs633.project.message;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.cs633.project.utils.JSONUtil;
 
 /**
  * Name: Donghang He
@@ -22,7 +22,7 @@ public class Response {
         return JSONUtil.createJSON(cmd, true, "", object);
     }
 
-    public static JSONObject sendBody(String cmd, JSONObject body) {
+    public static JSONObject sendBody(String cmd, Object body) {
         return JSONUtil.createJSON(cmd, true, "", body);
     }
 }

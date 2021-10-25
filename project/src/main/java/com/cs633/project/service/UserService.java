@@ -3,8 +3,7 @@ package com.cs633.project.service;
 import com.alibaba.fastjson.JSONObject;
 import com.cs633.project.DataBus;
 import com.cs633.project.db.entity.User;
-import com.cs633.project.message.JSONUtil;
-import com.cs633.project.message.Response;
+import com.cs633.project.utils.JSONUtil;
 import com.cs633.project.service.inter.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +38,10 @@ public class UserService implements IUserService {
         User user = getUserByName(username);
         return JSONUtil.createUser(user.getUsername(), user.getEmail(),
                 user.getPhoneNum(), user.getBirthday(), user.getLabel());
+    }
+
+    @Override
+    public User updateUser(User user) {
+        return dataBus.userRepository().save(user);
     }
 }

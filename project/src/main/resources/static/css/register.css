@@ -1,0 +1,43 @@
+.register-out {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 0 0;
+}
+.register {
+    height: 100%;
+    width: 100%;
+    margin: 0 0;
+}
+.back {
+    background-color: #B4B6DC;
+}
+.left-div {
+    margin: 200px 0 0 50px;
+}
+.first-p {
+    font-size: 40px;
+    color: #200372;
+}
+.second-p {
+    font-size: 25px;
+    color: white;
+}
+.right-div {
+    border-radius: 10%;
+    background-color: white;
+}
+.title-register {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+.input-change {
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid gray;
+}
+.register-btn {
+    background-color: #95A8DA;
+}

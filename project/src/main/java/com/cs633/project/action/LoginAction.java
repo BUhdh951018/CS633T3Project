@@ -37,17 +37,14 @@ public class LoginAction {
     }
 
     public JSONObject login(JSONObject object) {
-        JSONObject result;
 
         String username = object.getString("username");
         String password = object.getString("password");
 
         if (username.isBlank() || password.isBlank()) {
-            result = Response.sendErrorMessage(CommonConstant.ERROR_LOGIN_EMPTY, "login");
-        } else {
-            result = dataBus.loginService().login(username, password);
+            return Response.sendErrorMessage(CommonConstant.ERROR_LOGIN_EMPTY, "login");
         }
 
-        return result;
+        return dataBus.loginService().login(username, password);
     }
 }

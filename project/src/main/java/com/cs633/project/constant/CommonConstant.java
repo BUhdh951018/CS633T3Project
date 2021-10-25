@@ -26,4 +26,5 @@ public class CommonConstant {
     public static final String ERROR_LOGIN_EMPTY = "Username/Password is empty!";
     public static final String ERROR_LOGIN_USERNAME = "Username is wrong!";
     public static final String ERROR_LOGIN_PASSWORD = "Password is wrong!";
+    public static final String ERROR_TEAM_NAME_EMPTY = "Team name is empty";
 }

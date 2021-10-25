@@ -1,8 +1,13 @@
 package com.cs633.project;
 
+import com.cs633.project.db.dao.ProjectRepository;
+import com.cs633.project.db.dao.TaskRepository;
+import com.cs633.project.db.dao.TeamRepository;
 import com.cs633.project.db.dao.UserRepository;
+import com.cs633.project.db.entity.Task;
 import com.cs633.project.message.ReadMessage;
 import com.cs633.project.service.inter.ILoginService;
+import com.cs633.project.service.inter.ITeamService;
 import com.cs633.project.service.inter.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,19 +24,39 @@ public class DataBus implements IDataBus {
 
     @Autowired
     private IUserService userService;
-
     @Autowired
     private ILoginService loginService;
-
+    @Autowired
+    private ITeamService teamService;
     @Autowired
     private ReadMessage readMessage;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TeamRepository teamRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Override
     public UserRepository userRepository() {
         return userRepository;
+    }
+
+    @Override
+    public TeamRepository teamRepository() {
+        return teamRepository;
+    }
+
+    @Override
+    public ProjectRepository projectRepository() {
+        return projectRepository;
+    }
+
+    @Override
+    public TaskRepository taskRepository() {
+        return taskRepository;
     }
 
     @Override
@@ -47,5 +72,10 @@ public class DataBus implements IDataBus {
     @Override
     public ILoginService loginService() {
         return loginService;
+    }
+
+    @Override
+    public ITeamService teamService() {
+        return teamService;
     }
 }

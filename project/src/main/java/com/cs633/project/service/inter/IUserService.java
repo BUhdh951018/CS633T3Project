@@ -19,4 +19,6 @@ public interface IUserService {
     User getUserByName(String username);
 
     JSONObject getUserInfo(String username);
+
+    User updateUser(User user);
 }
