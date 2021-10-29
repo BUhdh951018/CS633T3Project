@@ -40,7 +40,7 @@ public class Task {
 
     private Integer complexity;
 
-    private Integer status;
+    private Integer status = 0;
 
     public Task() {
     }

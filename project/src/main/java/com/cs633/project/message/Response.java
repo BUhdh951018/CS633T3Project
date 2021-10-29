@@ -14,7 +14,8 @@ public class Response {
 
     private static final JSONObject object = null;
 
-    public static JSONObject sendErrorMessage(String message, String cmd) {
+    public static JSONObject sendErrorMessage(String message, String cmd, String... args) {
+        message = String.format(message, args);
         return JSONUtil.createJSON(cmd, false, message, object);
     }
 

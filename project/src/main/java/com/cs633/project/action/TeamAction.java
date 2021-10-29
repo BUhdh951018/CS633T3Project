@@ -52,4 +52,37 @@ public class TeamAction {
         User user = GetCurrentUser.getUser(object);
         return dataBus.teamService().getTeamInfo(user);
     }
+
+    public JSONObject deleteTeam(JSONObject object) {
+        User user = GetCurrentUser.getUser(object);
+        Long teamId = object.getLong("teamId");
+
+        if (teamId == null) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_TEAM_ID_EMPTY, "deleteTeam");
+        }
+
+        return dataBus.teamService().deleteTeam(user, teamId);
+    }
+
+    public JSONObject addMember(JSONObject object) {
+        Long teamId = object.getLong("teamId");
+        Long memberId = object.getLong("memberId");
+
+        if (teamId == null || memberId == null) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_INPUT_EMPTY, "addMember");
+        }
+
+        return dataBus.teamService().addMember(GetCurrentUser.getUser(object), teamId, memberId);
+    }
+
+    public JSONObject deleteMember(JSONObject object) {
+        Long teamId = object.getLong("teamId");
+        Long memberId = object.getLong("memberId");
+
+        if (teamId == null || memberId == null) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_INPUT_EMPTY, "deleteMember");
+        }
+
+        return dataBus.teamService().deleteMember(GetCurrentUser.getUser(object), teamId, memberId);
+    }
 }

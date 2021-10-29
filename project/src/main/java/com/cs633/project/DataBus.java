@@ -6,9 +6,7 @@ import com.cs633.project.db.dao.TeamRepository;
 import com.cs633.project.db.dao.UserRepository;
 import com.cs633.project.db.entity.Task;
 import com.cs633.project.message.ReadMessage;
-import com.cs633.project.service.inter.ILoginService;
-import com.cs633.project.service.inter.ITeamService;
-import com.cs633.project.service.inter.IUserService;
+import com.cs633.project.service.inter.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +26,10 @@ public class DataBus implements IDataBus {
     private ILoginService loginService;
     @Autowired
     private ITeamService teamService;
+    @Autowired
+    private IProjectService projectService;
+    @Autowired
+    private ITaskService taskService;
     @Autowired
     private ReadMessage readMessage;
     @Autowired
@@ -77,5 +79,15 @@ public class DataBus implements IDataBus {
     @Override
     public ITeamService teamService() {
         return teamService;
+    }
+
+    @Override
+    public IProjectService projectService() {
+        return projectService;
+    }
+
+    @Override
+    public ITaskService taskService() {
+        return taskService;
     }
 }
