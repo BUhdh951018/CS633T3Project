@@ -33,6 +33,54 @@ class responseHandler {
     getUserInfo(success, body) {
         userService(success, body)
     }
+
+    createTeam(success, body) {
+
+    }
+
+    getTeamInfo(success, body) {
+
+    }
+
+    deleteTeam(success, body) {
+
+    }
+
+    addMember(success, body) {
+
+    }
+
+    deleteMember(success, body) {
+
+    }
+
+    createProject(success, body) {
+
+    }
+
+    getProjectInfo(success, body) {
+
+    }
+
+    updateProject(success, body) {
+
+    }
+
+    deleteProject(success, body) {
+
+    }
+
+    createTask(success, body) {
+
+    }
+
+    updateTask(success, body) {
+
+    }
+
+    deleteTask(success, body) {
+
+    }
 }
 
 export { responseHandler }

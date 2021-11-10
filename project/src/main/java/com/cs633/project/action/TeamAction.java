@@ -37,12 +37,11 @@ public class TeamAction {
     public JSONObject createTeam(JSONObject object) {
         JSONObject result;
         String teamName = object.getString("name");
-        String username = object.getString("username");
 
         if (teamName.isBlank()) {
             result = Response.sendErrorMessage(CommonConstant.ERROR_TEAM_NAME_EMPTY, "createTeam");
         } else {
-            User user = dataBus.userService().getUserByName(username);
+            User user = GetCurrentUser.getUser(object);
             result = dataBus.teamService().createTeam(user, teamName);
         }
         return result;

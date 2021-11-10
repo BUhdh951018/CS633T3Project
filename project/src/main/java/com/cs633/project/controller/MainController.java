@@ -31,7 +31,12 @@ public class MainController {
 
     @GetMapping("/")
     public String root() {
-        return "redirect:/index";
+        return "redirect:/main";
+    }
+
+    @GetMapping("/main")
+    public String main() {
+        return "Main";
     }
 
     @GetMapping("/index")
