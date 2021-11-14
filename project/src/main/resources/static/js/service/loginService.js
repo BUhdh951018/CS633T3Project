@@ -8,6 +8,8 @@ function loginService(success) {
 }
 
 function loginSuccess() {
+    $("#login-page").hide()
+    $("#team-page").fadeIn()
     getUserInfo()
 }　
 

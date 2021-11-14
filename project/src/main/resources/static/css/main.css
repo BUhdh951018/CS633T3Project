@@ -30,7 +30,6 @@
     margin: 90px auto auto;
 }
 .btnSign {
-    color: #FFF;
     border-color: #ED6D2E;
     background-color: #ED6D2E;
 }
@@ -38,4 +37,14 @@
 .btnMainLogin {
     color: #ED6D2E;
     border-color: #ED6D2E;
+}
+
+.aSign {
+    color: white;
+    text-decoration: none;
+}
+
+.aLogin {
+    color: #ED6D2E;
+    text-decoration: none;
 }

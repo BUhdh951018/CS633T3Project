@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <team>
+    <div class="container-fluid" id="team-page" >
+      <div class="row topBar">
+        <div class="col-md-2">
+          <img src="/static/images/logo.png" alt="" height="45px">
+        </div>
+        <div class="col-md-7"></div>
+        <div class="col-md-2">
+          <button class="btn">Home</button>
+          <img src="/static/images/person-fill.svg" alt="">
+        </div>
+      </div>
+
+      <object th:include="main/userInfo::userInfo" th:remove="tag"></object>
+    </div>
+  </team>
+</body>
+</html>
