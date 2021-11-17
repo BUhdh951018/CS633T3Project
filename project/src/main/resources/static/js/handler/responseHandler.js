@@ -1,5 +1,6 @@
 import { loginService } from "../service/loginService.js";
-import { userService } from "../service/userService.js";
+import { userInfoService } from "../service/userService.js";
+import { createTeamService, teamService } from "../service/teamService.js";
 
 class responseHandler {
     constructor(cmd, success, message, body) {
@@ -31,15 +32,15 @@ class responseHandler {
     }
 
     getUserInfo(success, body) {
-        userService(success, body)
+        userInfoService(success, body)
     }
 
     createTeam(success, body) {
-
+        createTeamService(success, body)
     }
 
     getTeamInfo(success, body) {
-
+        teamService(success, body)
     }
 
     deleteTeam(success, body) {

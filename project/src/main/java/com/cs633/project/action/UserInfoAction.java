@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cs633.project.IDataBus;
 import com.cs633.project.message.Response;
 import com.cs633.project.net.annotation.Action;
+import com.cs633.project.utils.GetCurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,12 @@ public class UserInfoAction {
     public JSONObject getUserInfo(JSONObject object) {
         String username = object.getString("username");
         return Response.sendBody("getUserInfo", dataBus.userService().getUserInfo(username));
+    }
+
+    public JSONObject updateUserInfo(JSONObject object) {
+        return Response.sendBody("updateUserInfo", dataBus.userService().updateUserInfo(
+                GetCurrentUser.getUser(object), object.getString("email"), object.getLong("phoneNum"),
+                object.getDate("birth"), object.getString("label")
+        ));
     }
 }

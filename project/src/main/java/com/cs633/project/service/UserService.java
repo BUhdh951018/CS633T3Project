@@ -2,7 +2,9 @@ package com.cs633.project.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cs633.project.DataBus;
+import com.cs633.project.constant.CommonConstant;
 import com.cs633.project.db.entity.User;
+import com.cs633.project.message.Response;
 import com.cs633.project.utils.JSONUtil;
 import com.cs633.project.service.inter.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,27 @@ public class UserService implements IUserService {
     @Override
     public User updateUser(User user) {
         return dataBus.userRepository().save(user);
+    }
+
+    @Override
+    public JSONObject updateUserInfo(User user, String email, Long phoneNum, Date birthday, String label) {
+        if (user == null) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_USER_NOT_EXIST, "updateUserInfo");
+        }
+
+        if (!email.isBlank()) {
+            user.setEmail(email);
+        }
+        if (phoneNum != null) {
+            user.setPhoneNum(phoneNum);
+        }
+        if (birthday != null) {
+            user.setBirthday(birthday);
+        }
+        if (!label.isBlank()) {
+            user.setLabel(label);
+        }
+        dataBus.userRepository().save(user);
+        return Response.sendSuccessMessage("updateUserInfo");
     }
 }

@@ -1,15 +1,18 @@
 import { logInfo } from "../common/common.js";
+import { getUser, saveUser } from "../crud/userRepository.js";
 
 
-function userService(success, body) {
+function userInfoService(success, body) {
     if (success) {
-        userInfo(body)
+        saveUser(body)
+        userInfo()
         logInfo('Message: user-info', body)
     }
 }
 
-function userInfo(body) {
+function userInfo() {
+    let user = getUser()
 
 }
 
-export { userService }
+export { userInfoService }

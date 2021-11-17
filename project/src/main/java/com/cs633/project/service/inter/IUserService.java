@@ -21,4 +21,6 @@ public interface IUserService {
     JSONObject getUserInfo(String username);
 
     User updateUser(User user);
+
+    JSONObject updateUserInfo(User user, String email, Long phoneNum, Date birthday, String label);
 }

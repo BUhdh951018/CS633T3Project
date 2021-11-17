@@ -1,4 +1,5 @@
 import { socketSend } from "../app.js";
+import { getUsername } from "../common/common.js";
 
 function createTask() {
     let name;
@@ -11,7 +12,7 @@ function createTask() {
 
     let message = {"cmd": "createTask",
         "message": {"name": name, "content": content, "ownerId": ownerId, "requesterId": requesterId, "start": start,
-            "end": end, "complexity": complexity, "username": sessionStorage.getItem('username')}}
+            "end": end, "complexity": complexity, "username": getUsername()}}
     socketSend(message)
 }
 
@@ -27,14 +28,14 @@ function updateTask() {
 
     let message = {"cmd": "updateTask",
         "message": {"taskId": taskId, "name": name, "content": content, "ownerId": ownerId, "requesterId": requesterId,
-            "start": start, "end": end, "complexity": complexity, "username": sessionStorage.getItem('username')}}
+            "start": start, "end": end, "complexity": complexity, "username": getUsername()}}
     socketSend(message)
 }
 
 function deleteTask() {
     let taskId
     let message = {"cmd": "deleteTask",
-        "message": {"taskId": taskId, "username": sessionStorage.getItem('username')}}
+        "message": {"taskId": taskId, "username": getUsername()}}
     socketSend(message)
 }
 

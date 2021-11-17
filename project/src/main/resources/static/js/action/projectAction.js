@@ -1,4 +1,5 @@
 import { socketSend } from "../app.js";
+import { getUsername } from "../common/common.js";
 
 function createProject() {
     let name;
@@ -6,7 +7,7 @@ function createProject() {
     let description;
     let message = {"cmd": "createProject",
         "message": {"name": name, "teamId": teamId, "description": description,
-            "username": sessionStorage.getItem('username')}}
+            "username": getUsername()}}
     socketSend(message)
 }
 
@@ -23,14 +24,14 @@ function updateProject() {
     let description;
     let message = {"cmd": "updateProject",
         "message": {"projectId": projectId, "name": name, "description": description,
-            "username": sessionStorage.getItem('username')}}
+            "username": getUsername()}}
     socketSend(message)
 }
 
 function deleteProject() {
     let projectId;
     let message = {"cmd": "deleteProject",
-        "message": {"projectId": projectId, "username": sessionStorage.getItem('username')}}
+        "message": {"projectId": projectId, "username": getUsername()}}
     socketSend(message)
 }
 

@@ -4,4 +4,7 @@ function logInfo(title, message) {
     console.groupEnd()
 }
 
-export { logInfo }
+function getUsername() {
+    return sessionStorage.getItem('username')
+}
+export { logInfo, getUsername }
