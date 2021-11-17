@@ -8,6 +8,7 @@ import com.cs633.project.db.entity.Task;
 import com.cs633.project.db.entity.User;
 import com.cs633.project.message.Response;
 import com.cs633.project.service.inter.ITaskService;
+import com.cs633.project.utils.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class TaskService implements ITaskService {
         task = dataBus.taskRepository().save(task);
         project.addTask(task.getId());
         dataBus.projectRepository().save(project);
-        return Response.sendSuccessMessage("createTask");
+        return Response.sendBody("createTask", JSONUtil.createTask(task));
     }
 
     @Override
@@ -75,8 +76,8 @@ public class TaskService implements ITaskService {
             task.setComplexity(complexity);
         }
 
-        dataBus.taskRepository().save(task);
-        return Response.sendSuccessMessage("updateTask");
+        task = dataBus.taskRepository().save(task);
+        return Response.sendBody("updateTask", JSONUtil.createTask(task));
     }
 
     @Override
@@ -96,6 +97,6 @@ public class TaskService implements ITaskService {
         dataBus.projectRepository().save(project);
 
         dataBus.taskRepository().delete(task);
-        return Response.sendSuccessMessage("deleteTask");
+        return Response.sendBody("deleteTask", JSONUtil.deleteItem(taskId));
     }
 }

@@ -35,7 +35,7 @@ public class TeamService implements ITeamService {
         team = dataBus.teamRepository().save(team);
         user.addTeam(team.getId());
         dataBus.userService().updateUser(user);
-        return Response.sendSuccessMessage("createTeam");
+        return Response.sendBody("createTeam", JSONUtil.createTeam(team));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class TeamService implements ITeamService {
             dataBus.userRepository().save(member);
         }
         dataBus.teamRepository().delete(team);
-        return Response.sendSuccessMessage("deleteTeam");
+        return Response.sendBody("deleteTeam", JSONUtil.deleteItem(teamId));
     }
 
     @Override
@@ -101,8 +101,8 @@ public class TeamService implements ITeamService {
         member.addTeam(teamId);
         dataBus.userRepository().save(member);
         team.addMember(memberId);
-        dataBus.teamRepository().save(team);
-        return Response.sendSuccessMessage("addMember");
+        team = dataBus.teamRepository().save(team);
+        return Response.sendBody("addMember", JSONUtil.createTeam(team));
     }
 
     @Override
@@ -127,9 +127,9 @@ public class TeamService implements ITeamService {
         member.deleteTeam(teamId);
         dataBus.userRepository().save(member);
         team.deleteMember(memberId);
-        dataBus.teamRepository().save(team);
+        team = dataBus.teamRepository().save(team);
 
-        return Response.sendSuccessMessage("deleteMember");
+        return Response.sendBody("deleteMember", JSONUtil.createTeam(team));
     }
 
     @Override

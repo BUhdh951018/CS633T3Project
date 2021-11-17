@@ -80,7 +80,8 @@ function updateProjectInfo(content, title) {
 
 function deleteProjectById(id) {
     project = getAllProject()
-    // todo update team
+    let content = {"projectId": id, "teamId": getProjectById(id).teamId}
+    updateTeamInfo(content, "deleteProject")
     deleteTaskByProjectId(id)
     project = project.filter(element => element.projectId !== Number(id))
     sessionStorage.setItem('project', JSON.stringify(project))

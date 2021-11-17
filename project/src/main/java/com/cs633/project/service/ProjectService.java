@@ -47,7 +47,7 @@ public class ProjectService implements IProjectService {
         project = dataBus.projectRepository().save(project);
         team.addProject(project.getId());
         dataBus.teamRepository().save(team);
-        return Response.sendSuccessMessage("createProject");
+        return Response.sendBody("createProject", JSONUtil.createProject(project));
     }
 
     @Override
@@ -86,8 +86,8 @@ public class ProjectService implements IProjectService {
         if (!description.isBlank()) {
             project.setDescription(description);
         }
-        dataBus.projectRepository().save(project);
-        return Response.sendSuccessMessage("updateProject");
+        project = dataBus.projectRepository().save(project);
+        return Response.sendBody("updateProject", JSONUtil.createProject(project));
     }
 
     @Override
@@ -118,6 +118,6 @@ public class ProjectService implements IProjectService {
             dataBus.taskRepository().delete(task);
         }
 
-        return Response.sendSuccessMessage("deleteProject");
+        return Response.sendBody("deleteProject", JSONUtil.deleteItem(projectId));
     }
 }

@@ -38,8 +38,7 @@ public class UserService implements IUserService {
 
     public JSONObject getUserInfo(String username) {
         User user = getUserByName(username);
-        return JSONUtil.createUser(user.getUsername(), user.getEmail(),
-                user.getPhoneNum(), user.getBirthday(), user.getLabel());
+        return JSONUtil.createUser(user);
     }
 
     @Override
@@ -65,7 +64,7 @@ public class UserService implements IUserService {
         if (!label.isBlank()) {
             user.setLabel(label);
         }
-        dataBus.userRepository().save(user);
-        return Response.sendSuccessMessage("updateUserInfo");
+        user = dataBus.userRepository().save(user);
+        return Response.sendBody("updateUserInfo", JSONUtil.createUser(user));
     }
 }

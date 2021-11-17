@@ -35,13 +35,13 @@ public class JSONUtil {
         return object;
     }
 
-    public static JSONObject createUser(String username, String email, Long phone, Date birthday, String label) {
+    public static JSONObject createUser(User user) {
         JSONObject object = new JSONObject();
-        object.put("username", username);
-        object.put("email", email);
-        object.put("phone", phone);
-        object.put("birthday", birthday);
-        object.put("label", label);
+        object.put("username", user.getUsername());
+        object.put("email", user.getEmail());
+        object.put("phone", user.getPhoneNum());
+        object.put("birthday", user.getBirthday());
+        object.put("label", user.getLabel());
         return object;
     }
 
@@ -56,7 +56,7 @@ public class JSONUtil {
             for (Long memberId : team.getMemberList()) {
                 Optional<User> user = dataBus.userRepository().findById(memberId);
                 if (user.isPresent()) {
-                    members.add(user);
+                    members.add(createUser(user.get()));
                 }
             }
         }
@@ -92,6 +92,39 @@ public class JSONUtil {
             }
         }
         object.put("tasks", tasks);
+        return object;
+    }
+
+    public static JSONObject createTask(Task task) {
+        JSONObject object = new JSONObject();
+        object.put("taskId", task.getId());
+        object.put("name", task.getName());
+        object.put("content", task.getContent());
+        object.put("start", task.getStart());
+        object.put("end", task.getEnd());
+        object.put("projectId", task.getProjectId());
+        object.put("complexity", task.getComplexity());
+        object.put("status", task.getStatus());
+        Optional<User> owner = dataBus.userRepository().findById(task.getOwnerId());
+        if (owner.isPresent()) {
+            object.put("owner", createUser(owner.get()));
+        } else {
+            object.put("owner", "");
+        }
+
+        Optional<User> requester = dataBus.userRepository().findById(task.getRequesterId());
+        if (requester.isPresent()) {
+            object.put("requester", createUser(requester.get()));
+        } else {
+            object.put("requester", "");
+        }
+        return object;
+    }
+
+    // delete team, delete project, delete task
+    public static JSONObject deleteItem(Long id) {
+        JSONObject object = new JSONObject();
+        object.put("id", id);
         return object;
     }
 }
