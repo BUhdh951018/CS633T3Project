@@ -65,6 +65,6 @@ public class UserService implements IUserService {
             user.setLabel(label);
         }
         user = dataBus.userRepository().save(user);
-        return Response.sendBody("updateUserInfo", JSONUtil.createUser(user));
+        return JSONUtil.createUser(user);
     }
 }

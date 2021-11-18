@@ -37,6 +37,10 @@ class responseHandler {
         userInfoService(success, body)
     }
 
+    updateUserInfo(success, body) {
+        userInfoService(success, body)
+    }
+
     createTeam(success, body) {
         updateTeamService(success, body, 'createTeam')
     }

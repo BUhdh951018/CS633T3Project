@@ -7,6 +7,8 @@ import io.netty.handler.codec.json.JsonObjectDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
 /**
  * Name: Donghang He
  * Date: 2021/10/25 2:38 下午
@@ -18,7 +20,14 @@ import org.springframework.stereotype.Service;
 public class GetCurrentUser {
 
     @Autowired
+    private IDataBus dataBus1;
+
     private static IDataBus dataBus;
+
+    @PostConstruct
+    public void init() {
+        dataBus = dataBus1;
+    }
 
     public static User getUser(JSONObject object) {
         String username = object.getString("username");

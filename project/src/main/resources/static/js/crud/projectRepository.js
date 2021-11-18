@@ -1,6 +1,6 @@
 import { deleteTaskByProjectId, saveTaskInfo } from "./taskRepository.js";
 import { addElement, deleteElement } from "../common/util.js";
-import { updateTeamInfo } from "./teamRepository";
+import { updateTeamInfo } from "./teamRepository.js";
 
 let projectArray = []
 let project, currentProject, flag

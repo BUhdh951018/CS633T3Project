@@ -1,5 +1,5 @@
-import { deleteProjectById, getAllProject, updateProjectInfo } from "../crud/projectRepository";
-import { logInfo } from "../common/common";
+import { deleteProjectById, getAllProject, updateProjectInfo } from "../crud/projectRepository.js";
+import { logInfo } from "../common/common.js";
 
 function projectService(success, body) {
     if (success) {

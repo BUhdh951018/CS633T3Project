@@ -14,7 +14,7 @@ function loginSuccess() {
     $("#login-page").hide()
     $("#team-page").fadeIn()
     getUserInfo()
-    getTeamInfo()
+    //getTeamInfo()
 }
 
 function setSession() {
@@ -24,4 +24,4 @@ function setSession() {
     sessionStorage.setItem('task', JSON.stringify(array))
 }　
 
-export {loginService}
+export { loginService }

@@ -9,7 +9,10 @@ function getUserInfo() {
 
 function updateUserInfo() {
     let message = {"cmd": "updateUserInfo",
-        "message": {"username": getUsername(), "email": "", "phoneNum": "", "birth": "", "label": ""}}
+        "message": {"username": getUsername(), "email": $("#email").val(),
+            "phoneNum": $("#phone").val(), "birth": $("#birthday").val(),
+            "label": $("#label").val()}}
+    socketSend(message)
 }
 
-export { getUserInfo }
+export { getUserInfo, updateUserInfo }
