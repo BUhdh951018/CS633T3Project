@@ -1,11 +1,6 @@
 import { getTeamInfo } from "../action/teamAction.js";
-import { saveTeamInfo } from "../crud/teamRepository";
-
-function createTeamService(success, body) {
-    if (success) {
-        getTeamInfo()
-    }
-}
+import { deleteTeamById, getAllTeam, saveTeamInfo, updateTeamInfo } from "../crud/teamRepository.js";
+import { logInfo } from "../common/common.js";
 
 function teamService(success, body) {
     if (success) {
@@ -15,4 +10,22 @@ function teamService(success, body) {
     }
 }
 
-export { createTeamService, teamService }
+function updateTeamService(success, body, title) {
+    if (success) {
+        if (title === 'createTeam') {
+            updateTeamInfo(body, 'team')
+            logInfo('Message: create team success', body)
+        } else {
+
+        }
+    }
+}
+
+function deleteTeamService(success, body) {
+    if (success) {
+        deleteTeamById(body)
+        logInfo('Message: delete team success', getAllTeam())
+    }
+}
+
+export { updateTeamService, teamService, deleteTeamService }

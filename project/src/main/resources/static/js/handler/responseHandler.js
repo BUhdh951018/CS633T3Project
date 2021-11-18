@@ -1,6 +1,8 @@
 import { loginService } from "../service/loginService.js";
 import { userInfoService } from "../service/userService.js";
-import { createTeamService, teamService } from "../service/teamService.js";
+import { updateTeamService, teamService, deleteTeamService } from "../service/teamService.js";
+import { deleteProjectService, projectService, updateProjectService } from "../service/projectService.js";
+import { deleteTaskService, taskService, updateTaskService } from "../service/taskService.js";
 
 class responseHandler {
     constructor(cmd, success, message, body) {
@@ -36,7 +38,7 @@ class responseHandler {
     }
 
     createTeam(success, body) {
-        createTeamService(success, body)
+        updateTeamService(success, body, 'createTeam')
     }
 
     getTeamInfo(success, body) {
@@ -44,19 +46,19 @@ class responseHandler {
     }
 
     deleteTeam(success, body) {
-
+        deleteTeamService(success, body)
     }
 
     addMember(success, body) {
-
+        updateTeamService(success, body, 'addMember')
     }
 
     deleteMember(success, body) {
-
+        updateTeamService(success, body, 'deleteMember')
     }
 
     createProject(success, body) {
-
+        projectService(success, body)
     }
 
     getProjectInfo(success, body) {
@@ -64,23 +66,23 @@ class responseHandler {
     }
 
     updateProject(success, body) {
-
+        updateProjectService(success, body)
     }
 
     deleteProject(success, body) {
-
+        deleteProjectService(success, body)
     }
 
     createTask(success, body) {
-
+        taskService(success, body)
     }
 
     updateTask(success, body) {
-
+        updateTaskService(success, body)
     }
 
     deleteTask(success, body) {
-
+        deleteTaskService(success, body)
     }
 }
 
