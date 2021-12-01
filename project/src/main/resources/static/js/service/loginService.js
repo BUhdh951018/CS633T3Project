@@ -14,7 +14,7 @@ function loginSuccess() {
     $("#login-page").hide()
     $("#team-page").fadeIn()
     getUserInfo()
-    //getTeamInfo()
+    getTeamInfo()
 }
 
 function setSession() {

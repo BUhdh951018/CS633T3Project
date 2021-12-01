@@ -10,6 +10,7 @@ import com.cs633.project.db.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.Date;
 import java.util.Optional;
 
@@ -24,7 +25,14 @@ import java.util.Optional;
 public class JSONUtil {
 
     @Autowired
+    private IDataBus dataBus1;
+
     private static IDataBus dataBus;
+
+    @PostConstruct
+    public void init() {
+        dataBus = dataBus1;
+    }
 
     public static JSONObject createJSON(String cmd, boolean success, String message, Object body) {
         JSONObject object = new JSONObject();

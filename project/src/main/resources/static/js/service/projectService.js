@@ -1,9 +1,11 @@
 import { deleteProjectById, getAllProject, updateProjectInfo } from "../crud/projectRepository.js";
 import { logInfo } from "../common/common.js";
+import { setTeamList } from "./teamService.js";
 
 function projectService(success, body) {
     if (success) {
         updateProjectInfo(body, 'project')
+        setTeamList()
         logInfo('Message: create project', body)
     }
 }

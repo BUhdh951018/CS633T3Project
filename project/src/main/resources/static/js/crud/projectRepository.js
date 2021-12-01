@@ -69,8 +69,8 @@ function updateProjectInfo(content, title) {
         if (checkProject(projectId)) {
             project = project.filter(element => element.projectId !== projectId)
         } else {
-            let content = {"projectId": projectId, "teamId": content.teamId}
-            updateTeamInfo(content, "createProject")
+            let temp = {"projectId": projectId, "teamId": content.teamId}
+            updateTeamInfo(temp, "createProject")
         }
         project.push(content)
     }

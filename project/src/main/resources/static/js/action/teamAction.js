@@ -13,8 +13,7 @@ function getTeamInfo() {
     socketSend(message)
 }
 
-function deleteTeam() {
-    let teamId;
+function deleteTeam(teamId) {
     let message = {"cmd": "deleteTeam",
         "message": {"teamId": teamId, "username": getUsername()}}
     socketSend(message)
