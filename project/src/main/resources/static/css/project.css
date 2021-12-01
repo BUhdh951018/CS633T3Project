@@ -1,0 +1,48 @@
+.project-username {
+    display: inline;
+}
+
+.project-top-left {
+    padding-left:50px;
+    color: gray;
+}
+
+.project-top-right {
+    padding-right: 50px;
+}
+
+.project-top p {
+    font-size: 25px;
+}
+
+.searchDiv {
+    height: 50px;
+}
+
+.searchDiv span {
+    border-right: 0;
+    border-radius: 40% 0 0 40%;
+}
+
+.searchDiv input {
+    border-left: 0;
+    border-radius: 0 20px 20px 0;
+    background-color: #e9ecef;
+}
+
+.task {
+    margin-top: 40px;
+    background-color: white;
+    padding: 0;
+}
+
+.line {
+    border: 1px gray solid;
+}
+
+.member {
+    margin-top: 40px;
+    background-color: white;
+    padding: 0;
+
+}

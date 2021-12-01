@@ -1,12 +1,10 @@
 import { socketSend } from "../app.js";
 import { getUsername } from "../common/common.js";
 
-function createProject() {
-    let name;
+function createProject(name, des) {
     let teamId;
-    let description;
     let message = {"cmd": "createProject",
-        "message": {"name": name, "teamId": teamId, "description": description,
+        "message": {"name": name, "teamId": teamId, "description": des,
             "username": getUsername()}}
     socketSend(message)
 }

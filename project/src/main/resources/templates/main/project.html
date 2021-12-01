@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <project>
+    <div id="project" class="row" style="margin-top: 70px">
+      <div class="col-md-8 project-top-left">
+        <h1>
+          Hi <div id="project-username" class="project-username">Ke</div>,
+        </h1>
+        <p>you can manage your whole team from here.</p>
+      </div>
+      <div class="col-md-4 project-top-right">
+        <div class="input-group mb-3 searchDiv">
+          <span class="input-group-text">
+            <img src="/static/images/search.svg" alt="">
+          </span>
+          <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon1">
+        </div>
+      </div>
+    </div>
+
+    <object th:include="main/addTeam::addTeam" th:remove="tag"></object>
+    <object th:include="main/project/addProject::addProject" th:remove="tag"></object>
+
+    <object th:include="main/project/task::task" th:remove="tag"></object>
+
+    <object th:include="main/project/addTask::addTask" th:remove="tag"></object>
+  </project>
+</body>
+</html>

@@ -10,3 +10,37 @@
     float: right;
     margin-top: 6px;
 }
+
+.leftBar {
+    margin-top: 40px;
+}
+
+.noPadding {
+    padding: 0;
+}
+
+.leftBar-btn {
+    height: 80px;
+    /*background: linear-gradient(to right, #ED6D2E, #ffffff);*/
+    /*border-left: #ED6D2E 4px solid;*/
+}
+
+.navbar-icon {
+    margin-left: 40px;
+    width: 30px;
+    height: 24px;
+}
+
+.navbar-icon2 {
+    margin-left: 10px;
+    width: 30px;
+    height: 24px;
+}
+
+.link-btn {
+    color: gray;
+}
+
+.main-content {
+    background-color: #E0FFFF;
+}

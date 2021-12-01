@@ -3,7 +3,7 @@
 
 <body>
   <team>
-    <div class="container-fluid" id="team-page" style="display: none">
+    <div class="container-fluid" id="team-page" >
       <div class="row topBar">
         <div class="col-md-2">
           <img src="/static/images/logo.png" alt="" height="45px">
@@ -16,7 +16,42 @@
         </div>
       </div>
 
-      <object th:include="main/userInfo::userInfo" th:remove="tag"></object>
+      <div class="row">
+        <div class="col-md-2 noPadding leftBar">
+          <nav class="navbar">
+            <div class="container-fluid noPadding leftBar-btn">
+              <a class="navbar-brand link-btn">
+                <img class="navbar-icon d-inline-block align-text-top" src="/static/images/house-door-fill.svg" alt="">
+                Home
+              </a>
+            </div>
+            <div class="container-fluid noPadding leftBar-btn">
+              <a class="navbar-brand link-btn">
+                <img class="navbar-icon d-inline-block align-text-top" src="/static/images/people-fill.svg" alt="">
+                Team
+                <img id="showTeamList" class="navbar-icon2 d-inline-block align-text-top"
+                     src="/static/images/caret-down-fill.svg" alt="">
+                <img id="showAddTeamDiv" class="navbar-icon2 d-inline-block align-text-top"
+                     src="/static/images/plus-circle-dotted.svg" alt="">
+              </a>
+            </div>
+
+            <div id="team-list" style="display: none">
+            </div>
+
+            <div class="container-fluid noPadding leftBar-btn">
+              <a class="navbar-brand link-btn">
+                <img class="navbar-icon d-inline-block align-text-top" src="/static/images/person-square.svg" alt="">
+                Account
+              </a>
+            </div>
+          </nav>
+        </div>
+        <div class="col-md-10 main-content">
+          <object th:include="main/userInfo::userInfo" th:remove="tag"></object>
+          <object th:include="main/project::project" th:remove="tag"></object>
+        </div>
+      </div>
     </div>
   </team>
 </body>
