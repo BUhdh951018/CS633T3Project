@@ -1,4 +1,5 @@
 import { createTeam, deleteTeam } from "../action/teamAction.js";
+import { getUser } from "../crud/userRepository.js";
 
 let team_page = $("#team-page")
 
@@ -14,10 +15,18 @@ $(document).ready(() => {
         $(this).attr('src', '/static/images/caret-down-fill.svg').attr('id', 'showTeamList')
     })
 
-    $("#showAddTeamDiv").click(() => {
+    team_page.delegate("#showAddTeamDiv", 'click', function () {
+        $(this).attr('id', 'closeAddTeamDiv')
         $("#project").hide()
         $("#addTeamDiv").fadeIn()
+        $("#addTeamDiv #project-username").empty().append(getUser().username)
         // todo change back color
+    })
+
+    team_page.delegate("#closeAddTeamDiv", 'click', function () {
+        $(this).attr('id', 'showAddTeamDiv')
+        $("#addTeamDiv").hide()
+        $("#project").fadeIn()
     })
 
     $("#createTeamBtn").click(() => {

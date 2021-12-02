@@ -1,3 +1,5 @@
+import { getUser } from "../crud/userRepository.js";
+
 function logInfo(title, message) {
     console.group(title)
     console.log(message)

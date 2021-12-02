@@ -44,11 +44,9 @@ function updateTaskInfo(content) {
     task = getAllTask()
     if (checkTask(taskId)) {
         task = task.filter(element => element.id !== taskId)
-    } else {
-        let content = {"taskId": taskId, "projectId": content.projectId}
-        updateProjectInfo(content, "createTask")
     }
     task.push(content)
+    updateProjectInfo(content, "task")
     sessionStorage.setItem('task', JSON.stringify(task))
 }
 
@@ -57,8 +55,7 @@ function updateTaskInfo(content) {
 function deleteTaskById(id) {
     task = getAllTask()
     task = task.filter(element => element.id !== Number(id))
-    let content = {"taskId": id, "projectId": getTaskById(id).projectId}
-    updateProjectInfo(content, "deleteTask")
+    updateProjectInfo(getTaskById(id), "deleteTask")
     sessionStorage.setItem('task', JSON.stringify(task))
 }
 

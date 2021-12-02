@@ -47,20 +47,26 @@ function updateProjectInfo(content, title) {
     let projectId = Number(content.projectId)
     project = getAllProject()
 
-    if (title === 'createTask') {
+    // create/update task
+    if (title === 'task') {
+        let taskId = Number(content.taskId)
         project.forEach(element => {
             if (element.projectId === projectId) {
-                let tasks = element.tasks
-                element.tasks = addElement(content.taskId, tasks)
+                if (checkTaskInProject(taskId, projectId)) {
+                    element.tasks = element.tasks.filter(element => element.taskId !== taskId)
+                }
+                element.tasks.push(content)
+                updateTeamInfo(element, 'project')
             }
         })
     }
 
     if (title === 'deleteTask') {
+        let taskId = Number(content.taskId)
         project.forEach(element => {
             if (element.projectId === projectId) {
-                let tasks = element.tasks
-                element.tasks = deleteElement(content.taskId, tasks)
+                element.tasks = element.tasks.filter(element => element.taskId !== taskId)
+                updateTeamInfo(element, 'project')
             }
         })
     }
@@ -68,11 +74,9 @@ function updateProjectInfo(content, title) {
     if (title === 'project') {
         if (checkProject(projectId)) {
             project = project.filter(element => element.projectId !== projectId)
-        } else {
-            let temp = {"projectId": projectId, "teamId": content.teamId}
-            updateTeamInfo(temp, "createProject")
         }
         project.push(content)
+        updateTeamInfo(content, "project")
     }
 
     sessionStorage.setItem('project', JSON.stringify(project))
@@ -103,6 +107,17 @@ function checkProject(projectId) {
     project = getAllProject()
     project.forEach(element => {
         if (element.projectId === projectId) {
+            flag = true
+        }
+    })
+    return flag
+}
+
+function checkTaskInProject(taskId, projectId) {
+    flag = false
+    let project = getProjectById(projectId)
+    project.tasks.forEach(element => {
+        if (element.id === taskId) {
             flag = true
         }
     })

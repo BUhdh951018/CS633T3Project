@@ -1,4 +1,5 @@
 import { createProject } from "../action/projectAction.js";
+import { getUser } from "../crud/userRepository.js";
 
 let div = $("#addProjectDiv")
 let team_page = $("#team-page")
@@ -9,6 +10,8 @@ $(document).ready(() => {
         div.attr('teamId', $(this).parent().attr('teamId'))
         $("#project").hide()
         $("#addProjectDiv").fadeIn()
+        $("#addProjectDiv #project-username").empty().append(getUser().username)
+
     })
 
     team_page.delegate("#closeCreateProject", 'click', function () {

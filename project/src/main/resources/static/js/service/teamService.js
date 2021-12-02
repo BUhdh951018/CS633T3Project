@@ -1,16 +1,24 @@
 import { getTeamInfo } from "../action/teamAction.js";
 import { deleteTeamById, getAllTeam, saveTeamInfo, updateTeamInfo } from "../crud/teamRepository.js";
 import { logInfo } from "../common/common.js";
-import { getProjectByTeamId } from "../crud/projectRepository.js";
+import { getAllProject, getProjectByTeamId } from "../crud/projectRepository.js";
+import { getAllTask } from "../crud/taskRepository.js";
+import { setCurrentProject } from "./projectService.js";
+import { getMemberByTeamId } from "../crud/teamRepository.js";
+import { getUser } from "../crud/userRepository.js";
 
 let team_list = $("#team-list")
-let projects
+let member_list = $('#member-list')
+let projects, user
 
 function teamService(success, body) {
     if (success) {
         if (body.length !== 0) {
             saveTeamInfo(body)
             setTeamList()
+            logInfo('Message: team-info', getAllTeam())
+            logInfo('Message: project-info', getAllProject())
+            logInfo('Message: task-info', getAllTask())
         }
     }
 }
@@ -20,16 +28,20 @@ function updateTeamService(success, body, title) {
         if (title === 'createTeam') {
             updateTeamInfo(body, 'team')
             setTeamList()
+            //memberInfo(body.teamId)
             logInfo('Message: create team success', body)
         } else {
-            // todo member
+            updateTeamInfo(body, 'team')
+            setCurrentProject()
+            logInfo('Message update member', body)
         }
     }
 }
 
 function deleteTeamService(success, body) {
     if (success) {
-        deleteTeamById(body)
+        deleteTeamById(body.id)
+        setTeamList()
         logInfo('Message: delete team success', getAllTeam())
     }
 }
@@ -63,6 +75,14 @@ function teamProject(project, list) {
         + project.name + "</div>"
         + "<img id='btnDeleteProject' class='team-icon' src='/static/images/folder-minus.svg' alt=''>"
         + "</li>");
+}
+
+function memberInfo(id) {
+    let temp_member = getMemberByTeamId(id);
+    member_list.empty();
+    member_list.attr('teamid', id);
+    user = getUser()
+    // todo show member list
 }
 
 export { updateTeamService, teamService, deleteTeamService, setTeamList }

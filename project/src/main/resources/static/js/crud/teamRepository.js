@@ -3,6 +3,7 @@ import { taskArray } from "./taskRepository.js";
 import { addElement, deleteElement } from "../common/util.js";
 
 let teamArray, currentTeam, team, flag
+let userId, member, username
 
 function saveTeamInfo(teams) {
     teamArray = []
@@ -44,20 +45,23 @@ function updateTeamInfo(content, title) {
         team.push(content)
     }
 
-    if (title === 'createProject') {
+    if (title === 'project') {
+        let projectId = Number(content.projectId)
         team.forEach(element => {
             if (element.teamId === id) {
-                let projects = element.projects
-                element.projects = addElement(content.projectId, projects)
+                if (checkProjectInTeam(projectId, id)) {
+                    element.projects = element.projects.filter(item => item.projectId !== projectId)
+                }
+                element.projects.push(content)
             }
         })
     }
 
     if (title === 'deleteProject') {
+        let projectId = Number(content.projectId)
         team.forEach(element => {
             if (element.teamId === id) {
-                let projects = element.projects
-                element.projects = deleteElement(content.projectId, projects)
+                element.projects = element.projects.filter(item => item.projectId !== projectId)
             }
         })
     }
@@ -72,6 +76,47 @@ function deleteTeamById(id) {
     sessionStorage.setItem('team', JSON.stringify(team))
 }
 
+function getMemberByTeamId(id) {
+    member = []
+    team = getAllTeam()
+    team.forEach(element => {
+        if (element.teamId === Number(id)) {
+            member = element.members
+        }
+    })
+    return member
+}
+
+function getMemberByName(name, teamId) {
+    userId = ''
+    team = getAllTeam()
+    team.forEach(element => {
+        if (element.teamId === Number(teamId)) {
+            element.members.forEach(member => {
+                if (member.name === name.toString()) {
+                    userId = member.id
+                }
+            })
+        }
+    })
+    return userId
+}
+
+function getMemberById(teamId, id) {
+    username = ''
+    team = getAllTeam()
+    team.forEach(element => {
+        if (element.teamId === Number(teamId)) {
+            element.members.forEach(member => {
+                if (member.id === Number(id)) {
+                    username = member.name
+                }
+            })
+        }
+    })
+    return username
+}
+
 function checkTeam(id) {
     flag = false
     team = getAllTeam()
@@ -84,6 +129,22 @@ function checkTeam(id) {
     return flag
 }
 
+function checkProjectInTeam(projectId, teamId) {
+    flag = false
+    team = getAllTeam()
+    team.forEach(element => {
+        if (element.teamId === teamId) {
+            element.projects.forEach(item => {
+                if (item.projectId === projectId) {
+                    flag = true
+                }
+            })
+        }
+    })
+    return flag
+}
+
 export { saveTeamInfo }
 export { getAllTeam, getTeamById }
 export { updateTeamInfo, deleteTeamById }
+export { getMemberByTeamId, getMemberByName, getMemberById }

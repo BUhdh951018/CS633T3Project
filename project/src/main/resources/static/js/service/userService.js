@@ -12,6 +12,7 @@ function userInfoService(success, body) {
 function userInfo() {
     let user = getUser()
     $("#navbar-username").empty().append(user.username)
+    $("#project-username").empty().append(user.username)
     $("#email").empty().val(user.email)
     $("#phone").empty().val(user.phone)
     let date = new Date(user.birthday)
