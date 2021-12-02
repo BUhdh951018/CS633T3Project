@@ -45,6 +45,7 @@ public class JSONUtil {
 
     public static JSONObject createUser(User user) {
         JSONObject object = new JSONObject();
+        object.put("id", user.getId());
         object.put("username", user.getUsername());
         object.put("email", user.getEmail());
         object.put("phone", user.getPhoneNum());

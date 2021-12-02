@@ -31,11 +31,11 @@ function getProjectByTeamId(id) {
 }
 
 function getProjectById(id) {
-    currentProject = []
+    currentProject = null
     project = getAllProject()
     project.forEach(element => {
         if (element.projectId === Number(id)) {
-            currentProject.push(element)
+            currentProject = element
         }
     })
 

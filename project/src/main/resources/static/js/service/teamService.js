@@ -81,8 +81,20 @@ function memberInfo(id) {
     let temp_member = getMemberByTeamId(id);
     member_list.empty();
     member_list.attr('teamid', id);
-    user = getUser()
-    // todo show member list
+    temp_member.forEach(element => {
+        member_list.append(getMemberInfoIcon(element))
+    })
+
+}
+
+function getMemberInfoIcon(user) {
+    return "<div class='member-profile'><dt>"
+        + "<img class='member-icon-big' src='/static/images/person-circle.svg' alt=''>"
+        + user.username
+        + "<img id='btnDeleteMember' userid='" + user.id + "' "
+        + "src='/static/images/dash-circle-fill.svg' class='member-icon-sm' alt=''>"
+        + "</dt></div>"
 }
 
 export { updateTeamService, teamService, deleteTeamService, setTeamList }
+export { memberInfo }

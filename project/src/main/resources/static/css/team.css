@@ -48,3 +48,15 @@
 .team-icon{
     margin-left: 10px;
 }
+
+.member-icon-big {
+    margin: 0 10px 0 15px;
+    width: 40px;
+    height: 40px;
+}
+
+.member-icon-sm {
+    margin-left: 20px;
+    width: 20px;
+    height: 20px;
+}
