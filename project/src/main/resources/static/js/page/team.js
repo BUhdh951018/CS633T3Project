@@ -79,6 +79,7 @@ $(document).ready(() => {
         $('#updateProjectDiv').hide()
         $('#addTeamDiv').hide()
         $('#addProjectDiv').hide()
+        $('#task-table').hide()
         $('#project').fadeIn()
         $('#add-task-btn').fadeIn()
         $('#member-list-head').fadeIn()

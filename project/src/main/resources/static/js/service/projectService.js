@@ -1,7 +1,7 @@
 import { deleteProjectById, getAllProject, getProjectById, updateProjectInfo } from "../crud/projectRepository.js";
 import { logInfo } from "../common/common.js";
-import { setTeamList } from "./teamService.js";
-import { memberInfo } from "./teamService.js";
+import { setTeamList, memberInfo } from "./teamService.js";
+import { taskList } from "./taskService.js";
 
 let show_project_name = $('#show-project-name')
 
@@ -39,7 +39,7 @@ function projectInfo(projectId) {
     show_project_name.attr('projectid', projectId)
     $('#show-project-des').empty().append(cur_project.description)
     memberInfo(cur_project.teamId)
-    //taskInfo(task, cur_project)
+    taskList(task)
 }
 
 function setCurrentProject() {

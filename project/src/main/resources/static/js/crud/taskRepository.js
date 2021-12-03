@@ -17,7 +17,7 @@ function getTaskById(id) {
     currentTask = null
     task = getAllTask()
     task.forEach(element => {
-        if (element.id === Number(id)) {
+        if (element.taskId === Number(id)) {
             currentTask = element
         }
     })

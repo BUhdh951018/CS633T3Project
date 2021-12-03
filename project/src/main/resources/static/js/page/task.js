@@ -2,14 +2,15 @@ import { createTask } from "../action/taskAction.js";
 import { getMemberByTeamId, getMemberById } from "../crud/teamRepository.js";
 import { getTaskById } from "../crud/taskRepository.js";
 import { getProjectById } from "../crud/projectRepository.js";
+import { taskInfo } from "../service/taskService.js";
 
 let taskTable = $('#task-table')
+let task_list = $('#task-list')
 
 $(document).ready(() => {
     // show add task div
     $('#showAddTask').click(() => {
         $('#add-task-btn').hide()
-        $('#task-list').hide()
         let teamId = $('#member-list').attr('teamid')
         addOwnerRequester(getMemberByTeamId(teamId))
         $('#addTaskDiv').fadeIn()
@@ -20,12 +21,17 @@ $(document).ready(() => {
         createTask(id)
         $('#addTaskDiv').hide()
         $('#add-task-btn').fadeIn()
-        $('#task-list').fadeIn()
+    })
+    // show detail
+    task_list.delegate('button', 'click', function () {
+        let id = $(this).attr('taskid')
+        let task = getTaskById(id)
+        taskInfo(task, getProjectById(task.projectId))
+        $('#task-table').fadeIn()
     })
     // show update div
     taskTable.delegate('#showUpdateTaskDiv', 'click', function () {
         $('#add-task-btn').hide()
-        $('#task-list').hide()
         $('#updateTaskDiv').fadeIn()
         let taskId = $(this).attr('taskid')
         updateTaskTable(taskId)

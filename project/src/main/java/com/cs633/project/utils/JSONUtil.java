@@ -96,7 +96,7 @@ public class JSONUtil {
             for (Long taskId : project.getTaskList()) {
                 Optional<Task> task = dataBus.taskRepository().findById(taskId);
                 if (task.isPresent()) {
-                    tasks.add(task.get());
+                    tasks.add(createTask(task.get()));
                 }
             }
         }

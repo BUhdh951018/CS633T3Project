@@ -19,12 +19,29 @@
             <br>
             New Task
           </button>
+          <div id="task-list" style="display: inline"></div>
+
+          <table id="task-table" class="table table-hover text-center" style="display: none">
+            <thead>
+            <tr class="th-font">
+              <th>Name</th>
+              <th>Content</th>
+              <th>Owner</th>
+              <th>Requester</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Complexity</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="my-table">
+            </tbody>
+          </table>
         </div>
 
         <object th:include="main/project/task/addTask::addTask" th:remove="tag"></object>
         <object th:include="main/project/task/updateTask::updateTask" th:remove="tag"></object>
 
-        <div id="task-list"></div>
       </div>
 
       <div class="col-md-1"></div>
