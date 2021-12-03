@@ -3,16 +3,16 @@
 
 <body>
   <project>
-    <div id="project" class="row" style="margin-top: 70px">
+    <div id="project" class="row" style="margin-top: 50px">
       <div class="col-md-8 project-top-left">
         <h1>
           Hi <div id="project-username" class="project-username">Ke</div>,
         </h1>
         <p>you can manage your whole team from here.</p>
         <h3>
-          <div id="show-project-name">project 3</div>
+          <div id="show-project-name"></div>
         </h3>
-        <div id="show-project-des">good</div>
+        <div id="show-project-des"></div>
       </div>
       <div class="col-md-4 project-top-right">
         <div class="input-group mb-3 searchDiv">
@@ -26,10 +26,9 @@
 
     <object th:include="main/addTeam::addTeam" th:remove="tag"></object>
     <object th:include="main/project/addProject::addProject" th:remove="tag"></object>
+    <object th:include="main/project/updateProject::updateProject" th:remove="tag"></object>
 
-    <object th:include="main/project/task::task" th:remove="tag"></object>
-
-    <object th:include="main/project/addTask::addTask" th:remove="tag"></object>
+    <object th:include="main/project/task/task::task" th:remove="tag"></object>
   </project>
 </body>
 </html>

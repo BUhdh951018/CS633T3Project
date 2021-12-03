@@ -19,17 +19,13 @@ function deleteTeam(teamId) {
     socketSend(message)
 }
 
-function addMember() {
-    let teamId;
-    let memberId;
+function addMember(memberId, teamId) {
     let message = {"cmd": "addMember",
         "message": {"teamId": teamId, "memberId": memberId, "username": getUsername()}}
     socketSend(message)
 }
 
-function deleteMember() {
-    let teamId;
-    let memberId;
+function deleteMember(teamId, memberId) {
     let message = {"cmd": "deleteMember",
         "message": {"teamId": teamId, "memberId": memberId, "username": getUsername()}}
     socketSend(message)

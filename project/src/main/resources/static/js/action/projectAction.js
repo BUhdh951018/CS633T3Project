@@ -15,18 +15,14 @@ function getProjectInfo() {
     socketSend(message)
 }
 
-function updateProject() {
-    let projectId;
-    let name;
-    let description;
+function updateProject(name, description, projectId) {
     let message = {"cmd": "updateProject",
         "message": {"projectId": projectId, "name": name, "description": description,
             "username": getUsername()}}
     socketSend(message)
 }
 
-function deleteProject() {
-    let projectId;
+function deleteProject(projectId) {
     let message = {"cmd": "deleteProject",
         "message": {"projectId": projectId, "username": getUsername()}}
     socketSend(message)

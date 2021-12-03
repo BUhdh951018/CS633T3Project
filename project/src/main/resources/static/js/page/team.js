@@ -1,7 +1,8 @@
-import { addMember, createTeam, deleteTeam } from "../action/teamAction.js";
+import { addMember, createTeam, deleteMember, deleteTeam } from "../action/teamAction.js";
 import { getUser } from "../crud/userRepository.js";
 import { memberInfo } from "../service/teamService.js";
 import { getProjectById } from "../crud/projectRepository.js";
+import { projectInfo } from "../service/projectService.js";
 
 let team_page = $("#team-page")
 let team_list = $('#team-list')
@@ -51,23 +52,35 @@ $(document).ready(() => {
         $(this).attr('id', 'closeAddMemberDiv')
         $('#addMemberDiv').fadeIn()
     })
-    // todo close add member div
+    // close add member div
     member_list_head.delegate('#closeAddMemberDiv', 'click', function () {
         $(this).attr('id', 'showAddMemberDiv')
         $('#addMemberDiv').hide()
     })
-    // todo add member
+    // add member
     $('#addMemberBtn').click(() => {
         let memberId = $('#addMemberInput').val()
-        addMember(memberId)
+        addMember(memberId, $('#member-list').attr('teamid'))
         $('#closeAddMemberDiv').attr('id', 'showAddMemberDiv')
         $('#addMemberDiv').hide()
+    })
+    //delete member
+    $('#member-list').delegate('#btnDeleteMember', 'click', function () {
+        let teamId = $('#member-list').attr('teamid')
+        deleteMember(teamId, $(this).attr('userid'))
+        memberInfo(teamId)
     })
     // select project
     team_list.delegate('li div', 'click', function () {
         let id = $(this).parent().attr('projectid')
+        projectInfo(id)
         let teamId = getProjectById(id).teamId
         memberInfo(teamId)
+        $('#updateProjectDiv').hide()
+        $('#addTeamDiv').hide()
+        $('#addProjectDiv').hide()
+        $('#project').fadeIn()
+        $('#add-task-btn').fadeIn()
         $('#member-list-head').fadeIn()
     })
 })

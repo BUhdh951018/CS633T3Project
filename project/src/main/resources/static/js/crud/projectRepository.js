@@ -84,6 +84,7 @@ function updateProjectInfo(content, title) {
 
 function deleteProjectById(id) {
     project = getAllProject()
+    console.log(getProjectById(id))
     let content = {"projectId": id, "teamId": getProjectById(id).teamId}
     updateTeamInfo(content, "deleteProject")
     deleteTaskByProjectId(id)

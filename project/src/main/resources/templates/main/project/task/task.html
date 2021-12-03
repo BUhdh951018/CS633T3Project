@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
   <task>
     <div id="task" class="row">
@@ -12,6 +12,19 @@
         </div>
 
         <div class="line"></div>
+
+        <div id="add-task-btn" style="display: none">
+          <button id="showAddTask" class="task-btn btn">
+            <img class="task-icon" src="/static/images/plus-circle-fill-c.svg" alt="">
+            <br>
+            New Task
+          </button>
+        </div>
+
+        <object th:include="main/project/task/addTask::addTask" th:remove="tag"></object>
+        <object th:include="main/project/task/updateTask::updateTask" th:remove="tag"></object>
+
+        <div id="task-list"></div>
       </div>
 
       <div class="col-md-1"></div>
