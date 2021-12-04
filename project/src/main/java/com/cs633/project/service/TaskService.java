@@ -99,4 +99,16 @@ public class TaskService implements ITaskService {
         dataBus.taskRepository().delete(task);
         return Response.sendBody("deleteTask", JSONUtil.deleteItem(taskId));
     }
+
+    @Override
+    public JSONObject updateTaskStatus(User user, Long taskId, Integer status) {
+        Optional<Task> optionalTask = dataBus.taskRepository().findById(taskId);
+        if (optionalTask.isEmpty()) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_TASK_NOT_EXIST, "deleteTask");
+        }
+        Task task = optionalTask.get();
+        task.setStatus(status);
+        task = dataBus.taskRepository().save(task);
+        return Response.sendBody("updateTaskStatus", JSONUtil.createTask(task));
+    }
 }

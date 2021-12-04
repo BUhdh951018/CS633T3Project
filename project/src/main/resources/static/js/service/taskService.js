@@ -19,7 +19,7 @@ function updateTaskService(success, body) {
     if (success) {
         updateTaskInfo(body)
         setCurrentProject()
-        taskInfo(body, )
+        taskInfo(body)
         logInfo('Message: update task', body)
     }
 }
@@ -29,6 +29,15 @@ function deleteTaskService(success, body) {
         deleteTaskById(body.id)
         setCurrentProject()
         logInfo('Message: delete task', getAllTask())
+    }
+}
+
+function statusTaskService(success, body) {
+    if (success) {
+        updateTaskInfo(body)
+        setCurrentProject()
+        taskInfo(body)
+        logInfo('Message: update status', body)
     }
 }
 
@@ -78,5 +87,5 @@ function setTaskInit() {
     requester = ''
 }
 
-export { taskService, updateTaskService, deleteTaskService }
+export { taskService, updateTaskService, deleteTaskService, statusTaskService }
 export { taskInfo, taskList }

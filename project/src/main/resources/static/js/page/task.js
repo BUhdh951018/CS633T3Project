@@ -1,4 +1,4 @@
-import { createTask, deleteTask, updateTask } from "../action/taskAction.js";
+import { createTask, deleteTask, updateTask, updateTaskStatus } from "../action/taskAction.js";
 import { getMemberByTeamId, getMemberById } from "../crud/teamRepository.js";
 import { getTaskById } from "../crud/taskRepository.js";
 import { getProjectById } from "../crud/projectRepository.js";
@@ -48,7 +48,11 @@ $(document).ready(() => {
     })
     // update status
     taskTable.delegate('#btnUpdateStatus', 'click', function () {
-
+        let taskId = $(this).parent().parent().attr('taskid')
+        let status = $(this).val()
+        if (Number(status) < 2) {
+            updateTaskStatus(taskId, status)
+        }
     })
     // delete task
     taskTable.delegate('#btnTaskDelete', 'click', function () {

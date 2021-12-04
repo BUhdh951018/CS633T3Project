@@ -1,5 +1,6 @@
 package com.cs633.project.action;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cs633.project.IDataBus;
 import com.cs633.project.constant.CommonConstant;
@@ -61,5 +62,15 @@ public class TaskAction {
         }
 
         return dataBus.taskService().deleteTask(GetCurrentUser.getUser(object), taskId);
+    }
+
+    public JSONObject updateTaskStatus(JSONObject object) {
+        Long taskId = object.getLong("taskId");
+        if (taskId == null) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_TASK_NOT_EXIST, "updateTask");
+        }
+
+        return dataBus.taskService().updateTaskStatus(GetCurrentUser.getUser(object), taskId,
+                object.getInteger("status"));
     }
 }

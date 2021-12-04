@@ -19,4 +19,6 @@ public interface ITaskService {
     JSONObject updateTask(User user, Long taskId, String name, String content, Long ownerId, Long requesterId,
                           Date start, Date end, Integer complexity);
     JSONObject deleteTask(User user, Long taskId);
+
+    JSONObject updateTaskStatus(User user, Long taskId, Integer status);
 }

@@ -2,7 +2,7 @@ import { loginService } from "../service/loginService.js";
 import { userInfoService } from "../service/userService.js";
 import { updateTeamService, teamService, deleteTeamService } from "../service/teamService.js";
 import { deleteProjectService, projectService, updateProjectService } from "../service/projectService.js";
-import { deleteTaskService, taskService, updateTaskService } from "../service/taskService.js";
+import { deleteTaskService, statusTaskService, taskService, updateTaskService } from "../service/taskService.js";
 
 class responseHandler {
     constructor(cmd, success, message, body) {
@@ -83,6 +83,10 @@ class responseHandler {
 
     updateTask(success, body) {
         updateTaskService(success, body)
+    }
+
+    updateTaskStatus(success, body) {
+        statusTaskService(success, body)
     }
 
     deleteTask(success, body) {

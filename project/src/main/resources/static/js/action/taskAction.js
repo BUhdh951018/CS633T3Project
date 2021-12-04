@@ -35,4 +35,11 @@ function deleteTask(taskId) {
     socketSend(message)
 }
 
-export { createTask, updateTask, deleteTask }
+function updateTaskStatus(taskId, content) {
+    let status = Number(content) + 1
+    let message = {"cmd": "updateTaskStatus",
+        "message": {"taskId": taskId, "username": getUsername(), "status": status}}
+    socketSend(message)
+}
+
+export { createTask, updateTask, deleteTask, updateTaskStatus }
