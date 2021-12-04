@@ -1,11 +1,13 @@
-import { createTask } from "../action/taskAction.js";
+import { createTask, deleteTask, updateTask } from "../action/taskAction.js";
 import { getMemberByTeamId, getMemberById } from "../crud/teamRepository.js";
 import { getTaskById } from "../crud/taskRepository.js";
 import { getProjectById } from "../crud/projectRepository.js";
-import { taskInfo } from "../service/taskService.js";
+import { taskInfo, taskList } from "../service/taskService.js";
+import { getCorrectDate } from "../common/common.js";
 
 let taskTable = $('#task-table')
 let task_list = $('#task-list')
+let updateTable = $('#update-table')
 
 $(document).ready(() => {
     // show add task div
@@ -33,20 +35,26 @@ $(document).ready(() => {
     taskTable.delegate('#showUpdateTaskDiv', 'click', function () {
         $('#add-task-btn').hide()
         $('#updateTaskDiv').fadeIn()
-        let taskId = $(this).attr('taskid')
+        let taskId = $(this).parent().parent().attr('taskid')
         updateTaskTable(taskId)
     })
     // update task
-    $('#btn-update-task').click(() => {
-
+    $('#btnTaskUpdate').click(function () {
+        let taskId = $('#update-table tr').attr('taskid')
+        let teamId = $('#update-table tr').attr('teamid')
+        updateTask(taskId, teamId)
+        $('#updateTaskDiv').hide()
+        $('#add-task-btn').fadeIn()
     })
     // update status
     taskTable.delegate('#btnUpdateStatus', 'click', function () {
 
     })
     // delete task
-    $('#btn-delete-task').click(function () {
-
+    taskTable.delegate('#btnTaskDelete', 'click', function () {
+        let taskId = $(this).parent().parent().attr('taskid')
+        deleteTask(taskId)
+        taskTable.hide()
     })
 })
 
@@ -81,8 +89,7 @@ function addOwnerRequester(members) {
 function updateTaskTable(id) {
     let task = getTaskById(id)
     let teamId = getProjectById(task.projectId).teamId
-    let owner = getMemberById(teamId, task.ownerId)
-    owner = addOwner(owner)
+    let owner = addOwner(task.owner.username)
     let start = new Date(task.start)
     let end = new Date(task.end)
     updateTable.empty()
@@ -91,7 +98,7 @@ function updateTaskTable(id) {
 // different update table for task
 function updateColumnByType(task, teamId, owner, start, end) {
     let type = task.type
-        return "<tr taskid='" + task.id + "' teamid='" + teamId + "'>"
+        return "<tr taskid='" + task.taskId + "' teamid='" + teamId + "'>"
             + "<td><input id='name' class=\"form-control\" value='" + task.name + "'/></td>"
             + "<td><input id='content' class=\"form-control\" value='" + task.content + "'/></td>"
             + "<td><select id='owner' class='custom-select'>" + owner + "</select></td>"
@@ -123,10 +130,10 @@ function addOwner(name) {
         temp = "<option selected>" + name + "</option>"
     }
     for (let i = 0; i < member.length; i++) {
-        if (member[i].name === name) {
+        if (member[i].username === name) {
             continue
         }
-        let row = "<option>" + member[i].name + "</option>"
+        let row = "<option>" + member[i].username + "</option>"
         temp += row
     }
     return temp

@@ -50,25 +50,25 @@ function updateProjectInfo(content, title) {
     // create/update task
     if (title === 'task') {
         let taskId = Number(content.taskId)
-        project.forEach(element => {
-            if (element.projectId === projectId) {
+        for (let i = 0; i < project.length; i++) {
+            if (project[i].projectId === projectId) {
                 if (checkTaskInProject(taskId, projectId)) {
-                    element.tasks = element.tasks.filter(element => element.taskId !== taskId)
+                    project[i].tasks = project[i].tasks.filter(element => element.taskId !== taskId)
                 }
-                element.tasks.push(content)
-                updateTeamInfo(element, 'project')
+                project[i].tasks.push(content)
+                updateTeamInfo(project[i], 'project')
             }
-        })
+        }
     }
 
     if (title === 'deleteTask') {
         let taskId = Number(content.taskId)
-        project.forEach(element => {
-            if (element.projectId === projectId) {
-                element.tasks = element.tasks.filter(element => element.taskId !== taskId)
-                updateTeamInfo(element, 'project')
+        for (let i = 0; i < project.length; i++) {
+            if (project[i].projectId === projectId) {
+                project[i].tasks = project[i].tasks.filter(element => element.taskId !== taskId)
+                updateTeamInfo(project[i], 'project')
             }
-        })
+        }
     }
 
     if (title === 'project') {
@@ -118,7 +118,7 @@ function checkTaskInProject(taskId, projectId) {
     flag = false
     let project = getProjectById(projectId)
     project.tasks.forEach(element => {
-        if (element.id === taskId) {
+        if (element.taskId === taskId) {
             flag = true
         }
     })

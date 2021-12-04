@@ -47,23 +47,23 @@ function updateTeamInfo(content, title) {
 
     if (title === 'project') {
         let projectId = Number(content.projectId)
-        team.forEach(element => {
-            if (element.teamId === id) {
+        for (let i = 0; i < team.length; i++) {
+            if (team[i].teamId === id) {
                 if (checkProjectInTeam(projectId, id)) {
-                    element.projects = element.projects.filter(item => item.projectId !== projectId)
+                    team[i].projects = team[i].projects.filter(element => element.projectId !== projectId)
                 }
-                element.projects.push(content)
+                team[i].projects.push(content)
             }
-        })
+        }
     }
 
     if (title === 'deleteProject') {
         let projectId = Number(content.projectId)
-        team.forEach(element => {
-            if (element.teamId === id) {
-                element.projects = element.projects.filter(item => item.projectId !== projectId)
+        for (let i = 0; i < team.length; i++) {
+            if (team[i].teamId === id) {
+                team[i].projects = team[i].projects.filter(element => element.projectId !== projectId)
             }
-        })
+        }
     }
 
     sessionStorage.setItem('team', JSON.stringify(team))

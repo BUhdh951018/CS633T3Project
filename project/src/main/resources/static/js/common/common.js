@@ -1,5 +1,5 @@
 import { getUser } from "../crud/userRepository.js";
-import { getMemberById } from "../crud/teamRepository.js";
+import { getMemberById, getMemberByName } from "../crud/teamRepository.js";
 
 function logInfo(title, message) {
     console.group(title)
@@ -29,6 +29,14 @@ function checkMember(teamId, content) {
         name = getMemberById(teamId, content)
     }
     return name
+}
+
+function checkMemberId(name, teamId) {
+    let id = ''
+    if (name !== null || name !== "" || name.length === 0) {
+        id = getMemberByName(name, teamId).toString()
+    }
+    return id
 }
 
 function checkDate(content) {
@@ -84,4 +92,4 @@ function getComplexColor(complex) {
 }
 
 export { logInfo, getUsername, getCorrectDate }
-export { checkMember, checkStatus, checkDate, checkComplex }
+export { checkMember, checkStatus, checkDate, checkComplex, checkMemberId }

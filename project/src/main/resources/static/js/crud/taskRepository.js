@@ -40,10 +40,10 @@ function getTaskByProjectId(id) {
 // create/update task
 // argument: task content
 function updateTaskInfo(content) {
-    let taskId = content.id
+    let taskId = content.taskId
     task = getAllTask()
     if (checkTask(taskId)) {
-        task = task.filter(element => element.id !== taskId)
+        task = task.filter(element => element.taskId !== taskId)
     }
     task.push(content)
     updateProjectInfo(content, "task")
@@ -54,7 +54,7 @@ function updateTaskInfo(content) {
 // argument: task id
 function deleteTaskById(id) {
     task = getAllTask()
-    task = task.filter(element => element.id !== Number(id))
+    task = task.filter(element => element.taskId !== Number(id))
     updateProjectInfo(getTaskById(id), "deleteTask")
     sessionStorage.setItem('task', JSON.stringify(task))
 }
@@ -71,7 +71,7 @@ function checkTask(taskId) {
     flag = false
     task = getAllTask()
     task.forEach(element => {
-        if (element.id === taskId) {
+        if (element.taskId === taskId) {
             flag = true
         }
     })

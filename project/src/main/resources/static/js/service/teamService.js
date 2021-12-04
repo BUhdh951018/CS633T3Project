@@ -88,12 +88,12 @@ function memberInfo(id) {
 }
 
 function getMemberInfoIcon(user) {
-    return "<div class='member-profile'><dt>"
+    return "<div class='member-profile'>"
         + "<img class='member-icon-big' src='/static/images/person-circle.svg' alt=''>"
         + user.username
         + "<img id='btnDeleteMember' userid='" + user.id + "' "
         + "src='/static/images/dash-circle-fill.svg' class='member-icon-sm' alt=''>"
-        + "</dt></div>"
+        + "</div>"
 }
 
 export { updateTeamService, teamService, deleteTeamService, setTeamList }

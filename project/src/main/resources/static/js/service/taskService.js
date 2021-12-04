@@ -19,13 +19,14 @@ function updateTaskService(success, body) {
     if (success) {
         updateTaskInfo(body)
         setCurrentProject()
+        taskInfo(body, )
         logInfo('Message: update task', body)
     }
 }
 
 function deleteTaskService(success, body) {
     if (success) {
-        deleteTaskById(body)
+        deleteTaskById(body.id)
         setCurrentProject()
         logInfo('Message: delete task', getAllTask())
     }
@@ -48,18 +49,19 @@ function taskList(task) {
     })
 }
 
-function taskInfo(task, project) {
+function taskInfo(task) {
     task_table.empty();
     setTaskInit()
     start = checkDate(task.start)
     end = checkDate(task.end)
-    owner = checkMember(project.teamId, task.ownerId)
-    requester = checkMember(project.teamId, task.requesterId)
+    owner = task.owner.username
+    requester = task.requester.username
     complex = checkComplex(task.complexity)
     status = checkStatus(task.status)
-    task_table.append("<tr taskid='" + task.id + "'>" +
+    task_table.append("<tr taskid='" + task.taskId + "'>" +
         "<td>" + task.name +
-        "<img id='btnTaskOperate' class='list-icon' src='/static/images/pencil-fill.svg' alt=''></td>" +
+        "<img id='showUpdateTaskDiv' class='list-icon' src='/static/images/pencil-fill.svg' alt=''>" +
+        "<img id='btnTaskDelete' class='list-icon' src='/static/images/dash-circle.svg' alt=''></td>" +
         "<td>" + task.content + "</td>" +
         "<td>" + owner + "</td>" +
         "<td>" + requester + "</td>" +

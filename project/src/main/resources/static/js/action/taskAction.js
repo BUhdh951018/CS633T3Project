@@ -1,5 +1,5 @@
 import { socketSend } from "../app.js";
-import { getUsername } from "../common/common.js";
+import { getUsername, checkMemberId } from "../common/common.js";
 
 function createTask(projectId) {
     let name = $('#task-name').val();
@@ -16,19 +16,16 @@ function createTask(projectId) {
     socketSend(message)
 }
 
-function updateTask() {
-    let taskId
-    let name
-    let content
-    let ownerId
-    let requesterId
-    let start
-    let end
-    let complexity
+function updateTask(taskId, teamId) {
+    let table = $('#update-table')
+    let owner = table.find('#owner').val()
+    owner = checkMemberId(owner, teamId)
 
     let message = {"cmd": "updateTask",
-        "message": {"taskId": taskId, "name": name, "content": content, "ownerId": ownerId, "requesterId": requesterId,
-            "start": start, "end": end, "complexity": complexity, "username": getUsername()}}
+        "message": {"taskId": taskId, "name": table.find('#name').val(),
+            "content": table.find('#content').val(), "ownerId": owner,
+            "start": table.find('#start').val(), "end": table.find('#end').val(),
+            "complexity": table.find('#complexity').val(), "username": getUsername()}}
     socketSend(message)
 }
 
