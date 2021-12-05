@@ -1,12 +1,11 @@
 .main-page {
-    margin-top: 180px;
     margin-left: 30px;
 }
 
 .first-title {
-    font-size: 35px;
+    font-size: 60px;
     font-weight: bold;
-    color: #254CAC
+    color: #ED6D2E
 }
 
 .second-title {
@@ -16,7 +15,8 @@
 }
 
 .third-p {
-    font-size: 20px;
+    font-size: 25px;
+    color: #254CAC;
 }
 
 .main-menu {
@@ -27,16 +27,26 @@
     max-width: 100%;
     max-height: 100%;
     display: block;
-    margin: 90px auto auto;
+    margin: 10px auto auto;
 }
 .btnSign {
     border-color: #ED6D2E;
     background-color: #ED6D2E;
+    border-radius: 30px;
+    margin-top: 30px;
+    margin-left: 45px;
+    width: 155px;
+    height: 60px;
 }
 
 .btnMainLogin {
     color: #ED6D2E;
     border-color: #ED6D2E;
+    border-radius: 30px;
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 155px;
+    height: 60px;
 }
 
 .aSign {

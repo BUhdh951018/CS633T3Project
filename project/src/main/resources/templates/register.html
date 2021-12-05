@@ -7,24 +7,31 @@
 </head>
 <body>
   <div class="container-fluid register-out">
-    <div class="row back register">
-      <div class="col-md-4">
+    <div class="row topBar">
+      <div class="col-md-2">
+        <img src="/static/images/logo.png" alt="" height="45px">
+      </div>
+      <div class="col-md-7"></div>
+      <div class="col-md-2">
+        <button class="btn navbar-btn">Home</button>
+        <img src="/static/images/person-fill.svg" alt="">
+      </div>
+    </div>
+
+    <div class="row register">
+      <div class="col-md-6">
         <div class="left-div">
           <p class="first-p">
-            Welcome to <br/>
-            TrackTastic.com<br/>
-          </p>
-          <p class="second-p">
-            Let's get started with a few<br/>
-            simple steps!
+            We are <br/>
+            glad you<br/>
+            are here!
           </p>
         </div>
       </div>
-      <div class="col-md-8 right-div">
-        <p class="text-center title-register">Create Account</p>
+      <div class="col-md-6 right-div">
         <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
+          <div class="col-md-8">
+            <p class="text-center title-register" style="color: #254CAC">Create Account</p>
             <form th:action="@{/register}" method="post">
               <div class="mb-3">
                 <input type="text" class="form-control input-change" id="username" name="username" placeholder="username">
@@ -44,7 +51,7 @@
               <div class="mb-3">
                 <input type="text" class="form-control input-change" id="label" name="label" placeholder="label">
               </div>
-              <button type="submit" class="btn login-btn register-btn">Login now</button> <br/>
+              <button type="submit" class="btn login-btn register-btn">Create Account</button> <br/>
             </form>
           </div>
         </div>
