@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public interface IUserService {
 
-    void createUser(String username, String password, String email, Long phoneNum, Date birthday, String label);
+    String createUser(String username, String password, String email, Long phoneNum, Date birthday, String label);
 
     User getUserByName(String username);
 

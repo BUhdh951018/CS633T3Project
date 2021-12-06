@@ -91,5 +91,14 @@ function getComplexColor(complex) {
     return "<button class='btn " + type + "'>" + complex + " points</button>"
 }
 
-export { logInfo, getUsername, getCorrectDate }
+function getQueryString(name) {
+    let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    let r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
+
+export { logInfo, getUsername, getCorrectDate, getQueryString }
 export { checkMember, checkStatus, checkDate, checkComplex, checkMemberId }

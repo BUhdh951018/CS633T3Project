@@ -37,6 +37,8 @@
     margin-left: 45px;
     width: 155px;
     height: 60px;
+    color: white;
+    text-decoration: none;
 }
 
 .btnMainLogin {
@@ -47,14 +49,13 @@
     margin-left: 100px;
     width: 155px;
     height: 60px;
+    text-decoration: none;
 }
 
 .aSign {
-    color: white;
-    text-decoration: none;
+
 }
 
 .aLogin {
-    color: #ED6D2E;
-    text-decoration: none;
+
 }

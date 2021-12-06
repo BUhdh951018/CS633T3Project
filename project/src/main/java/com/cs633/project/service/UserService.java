@@ -5,6 +5,7 @@ import com.cs633.project.DataBus;
 import com.cs633.project.constant.CommonConstant;
 import com.cs633.project.db.entity.User;
 import com.cs633.project.message.Response;
+import com.cs633.project.utils.GetCurrentUser;
 import com.cs633.project.utils.JSONUtil;
 import com.cs633.project.service.inter.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,13 @@ public class UserService implements IUserService {
     private DataBus dataBus;
 
     @Override
-    public void createUser(String username, String password, String email, Long phoneNum, Date birthday, String label) {
+    public String createUser(String username, String password, String email, Long phoneNum, Date birthday, String label) {
+        if (GetCurrentUser.checkUser(username)) {
+            return "username has been used";
+        }
         User user = new User(username, password, email, phoneNum, birthday, label);
         dataBus.userRepository().save(user);
+        return "";
     }
 
     @Override

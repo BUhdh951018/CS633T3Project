@@ -61,7 +61,10 @@ public class MainController {
         Date birth = CommonConstant.DATE_FORMAT.parse(birthday);
 
         password = CommonConstant.passwordEncoder.encode(password);
-        dataBus.userService().createUser(username, password, email, phoneNum, birth, label);
+        String message = dataBus.userService().createUser(username, password, email, phoneNum, birth, label);
+        if (!message.equals("")) {
+            return String.format("redirect:/register?message=%s", "username");
+        }
         return "redirect:/index";
     }
 
