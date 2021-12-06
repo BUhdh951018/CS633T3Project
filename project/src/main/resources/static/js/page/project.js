@@ -1,5 +1,6 @@
 import { createProject, deleteProject, updateProject } from "../action/projectAction.js";
 import { getUser } from "../crud/userRepository.js";
+import { hideForNew } from "../common/common.js";
 
 let div = $("#addProjectDiv")
 let team_page = $("#team-page")
@@ -10,8 +11,9 @@ $(document).ready(() => {
     team_page.delegate("#showCreateProject", 'click', function () {
         $(this).attr('id', 'closeCreateProject')
         div.attr('teamId', $(this).parent().attr('teamId'))
-        $("#project").hide()
+        hideForNew('project')
         $("#addProjectDiv").fadeIn()
+        $('#task').fadeIn()
         $("#addProjectDiv #project-username").empty().append(getUser().username)
     })
     // close create project div

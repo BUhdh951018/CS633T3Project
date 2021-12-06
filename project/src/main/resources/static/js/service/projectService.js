@@ -34,10 +34,10 @@ function deleteProjectService(success, body) {
 function projectInfo(projectId) {
     let cur_project = getProjectById(projectId)
     let task = cur_project.tasks
-    show_project_name.empty().append(cur_project.name
-        + "<img id='btnUpdateProject' class='list-icon' src='/static/images/pencil-fill.svg' alt=''>")
+    show_project_name.empty().append("Project: ").append(cur_project.name
+        + "<img id='btnUpdateProject' class='team-icon' src='/static/images/pencil-fill.svg' alt=''>")
     show_project_name.attr('projectid', projectId)
-    $('#show-project-des').empty().append(cur_project.description)
+    $('#show-project-des').empty().append("Description: ").append(cur_project.description)
     memberInfo(cur_project.teamId)
     taskList(task)
 }

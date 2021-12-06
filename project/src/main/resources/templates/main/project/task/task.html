@@ -3,7 +3,7 @@
 <body>
   <task>
     <div id="task" class="row">
-      <div class="col-md-8 task">
+      <div class="col-md-9 task">
         <div class="row">
           <div class="col-md-9">
             <h4 class="task-title">Project Task</h4>
@@ -14,14 +14,16 @@
         <div class="line"></div>
 
         <div id="add-task-btn" style="display: none">
-          <button id="showAddTask" class="task-btn btn">
-            <img class="task-icon" src="/static/images/plus-circle-fill-c.svg" alt="">
-            <br>
-            New Task
-          </button>
-          <div id="task-list" style="display: inline"></div>
+          <div class="task-list">
+            <button id="showAddTask" class="task-btn btn">
+              <img class="task-icon" src="/static/images/plus-circle-fill-c.svg" alt="">
+              <br>
+              New Task
+            </button>
+            <div id="task-list" style="display: inline"></div>
+          </div>
 
-          <table id="task-table" class="table table-hover text-center " style="display: none">
+          <table id="task-table" class="table table-hover text-center task-table" style="display: none">
             <thead class="table-secondary">
             <tr class="th-font">
               <th>Name</th>
@@ -44,19 +46,19 @@
 
       </div>
 
-      <div class="col-md-4 member">
+      <div class="col-md-3 member">
         <div class="row">
           <div class="col-md-6">
             <h5 id="memberListTeamName" class="task-title">Team</h5>
           </div>
-          <div class="col-md-6">Project:
-            <div id="memberListProjectName" style="display: inline"></div>
+          <div class="col-md-6">
+            <div id="memberListProjectName" style="display: inline">Project</div>
           </div>
         </div>
 
         <div class="line"></div>
 
-        <div id="member-list-head" class="row" style="display: none">
+        <div id="member-list-head" class="row member-head" style="display: none">
           <div>
             <img class='member-icon-big' src="/static/images/person-plus.svg" alt="">
             Add Member

@@ -4,6 +4,7 @@ import { memberInfo } from "../service/teamService.js";
 import { getProjectById } from "../crud/projectRepository.js";
 import { projectInfo } from "../service/projectService.js";
 import { getTeamById } from "../crud/teamRepository.js";
+import { changeBack, hideForNew, hideProject, hideTask, showTask } from "../common/common.js";
 
 let team_page = $("#team-page")
 let team_list = $('#team-list')
@@ -13,18 +14,21 @@ $(document).ready(() => {
     // show team list
     team_page.delegate("#showTeamList", 'click', function () {
         $("#team-list").fadeIn()
-        // todo change back color
+        changeBack('team')
         $(this).attr('src', '/static/images/caret-up-fill.svg').attr('id', 'closeTeamList')
     })
     // close team list
     team_page.delegate("#closeTeamList", 'click', function () {
         team_list.hide()
+        changeBack('')
         $(this).attr('src', '/static/images/caret-down-fill.svg').attr('id', 'showTeamList')
     })
     // show add team div
     team_page.delegate("#showAddTeamDiv", 'click', function () {
         $(this).attr('id', 'closeAddTeamDiv')
-        $("#project").hide()
+        changeBack('team')
+        hideForNew('team')
+        $('#task').fadeIn()
         $("#addTeamDiv").fadeIn()
         $("#addTeamDiv #project-username").empty().append(getUser().username)
         // todo change back color
@@ -33,6 +37,7 @@ $(document).ready(() => {
     team_page.delegate("#closeAddTeamDiv", 'click', function () {
         $(this).attr('id', 'showAddTeamDiv')
         $("#addTeamDiv").hide()
+        changeBack('')
         $("#project").fadeIn()
     })
     // create new team
@@ -82,6 +87,7 @@ $(document).ready(() => {
         hideProject()
         hideTask()
         $('#userInfo').hide()
+        changeBack('team')
         $('#project').fadeIn()
         showTask()
     })
@@ -91,24 +97,7 @@ $(document).ready(() => {
         $('#project').hide()
         hideProject()
         $('#task').hide()
+        changeBack('user')
         $('#userInfo').fadeIn()
     })
 })
-
-function hideProject() {
-    $('#updateProjectDiv').hide()
-    $('#addTeamDiv').hide()
-    $('#addProjectDiv').hide()
-}
-
-function hideTask() {
-    $('#task-table').hide()
-    $('#addTaskDiv').hide()
-    $('#updateTaskDiv').hide()
-}
-
-function showTask() {
-    $('#task').fadeIn()
-    $('#add-task-btn').fadeIn()
-    $('#member-list-head').fadeIn()
-}

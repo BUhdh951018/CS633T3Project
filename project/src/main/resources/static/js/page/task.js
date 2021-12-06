@@ -85,7 +85,7 @@ function addOwnerRequester(members) {
     $("#requester-list").empty();
     for (let i = 0; i < members.length; i++) {
         $('#owner-list').append('<li><a class="dropdown-item">' + members[i].username + '</a></li>');
-        $('#requester-list').append('<li><a class="dropdown-item">' + members[i].username + '</a></li>');
+        $('#requester-list').append('<li><a class="dropdown-item">' + members[i].username + '</a></li> ');
     }
 }
 

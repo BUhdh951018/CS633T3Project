@@ -69,8 +69,8 @@ function taskInfo(task) {
     status = checkStatus(task.status)
     task_table.append("<tr taskid='" + task.taskId + "'>" +
         "<td>" + task.name +
-        "<img id='showUpdateTaskDiv' class='list-icon' src='/static/images/pencil-fill.svg' alt=''>" +
-        "<img id='btnTaskDelete' class='list-icon' src='/static/images/dash-circle.svg' alt=''></td>" +
+        "<img id='showUpdateTaskDiv' class='team-icon' src='/static/images/pencil-fill.svg' alt=''>" +
+        "<img id='btnTaskDelete' class='team-icon' src='/static/images/dash-circle.svg' alt=''></td>" +
         "<td>" + task.content + "</td>" +
         "<td>" + owner + "</td>" +
         "<td>" + requester + "</td>" +

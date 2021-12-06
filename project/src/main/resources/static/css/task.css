@@ -1,11 +1,30 @@
 .task-btn {
     background-color: #FDF0EA;
     color: #ED6D2E;
-    width: 120px;
+    width: 130px;
     height: 150px;
+    margin: 10px 10px 0 0;
 }
 
 .task-icon {
     width: 30px;
     height: 30px;
+    margin-bottom: 10px;
 }
+
+.task-list {
+    margin: 20px;
+}
+
+.task-table {
+    margin-top: 40px;
+}
+
+.add-task-title {
+    margin-top: 20px
+}
+
+.add-task-div {
+    margin-top: 10px
+}
+

@@ -100,5 +100,55 @@ function getQueryString(name) {
     return null;
 }
 
+// new team, new project
+function hideForNew(type) {
+    $("#project").hide()
+    $('#userInfo').hide()
+    hideTask()
+    $('#add-task-btn').hide()
+    $('#memberListProjectName').empty().append('Project')
+    if (type === 'team') {
+        $('#addProjectDiv').hide()
+        $('#member-list-head').hide()
+        $('#member-list').empty()
+        $('#memberListTeamName').empty().append('Team')
+    } else {
+        $('#addTeamDiv').hide()
+    }
+}
+
+function hideProject() {
+    $('#updateProjectDiv').hide()
+    $('#addTeamDiv').hide()
+    $('#addProjectDiv').hide()
+}
+
+function hideTask() {
+    $('#task-table').hide()
+    $('#addTaskDiv').hide()
+    $('#updateTaskDiv').hide()
+}
+
+function showTask() {
+    $('#task').fadeIn()
+    $('#add-task-btn').fadeIn()
+    $('#member-list-head').fadeIn()
+}
+
+// todo btn back fuc
+function changeBack(type) {
+    if (type === 'team') {
+        $('#showAccount').removeClass('btn-change')
+        $('#btnTeam').addClass('btn-change')
+    } else if (type === 'user') {
+        $('#btnTeam').removeClass('btn-change')
+        $('#showAccount').addClass('btn-change')
+    } else {
+        $('#btnTeam').removeClass('btn-change')
+        $('#showAccount').removeClass('btn-change')
+    }
+}
+
 export { logInfo, getUsername, getCorrectDate, getQueryString }
 export { checkMember, checkStatus, checkDate, checkComplex, checkMemberId }
+export { hideForNew, hideProject, hideTask, showTask, changeBack }
