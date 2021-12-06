@@ -117,6 +117,8 @@ public class TeamService implements ITeamService {
             return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember", "team not exist");
         }
 
+        // todo not leader
+
         User member = optionalMember.get();
         Team team = optionalTeam.get();
         if (!isMember(member, team)) {

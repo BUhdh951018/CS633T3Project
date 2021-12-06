@@ -63,7 +63,7 @@ function setTeamInfo(team) {
 }
 
 function teamInfo(team, list, i) {
-    list.append("<div style='float: left;font-weight: bold;color: gray' teamId='" + team.teamId + "'>"
+    list.append("<div class='team-line' teamId='" + team.teamId + "'>"
         + "<div style='display: inline'>" + (i + 1) + ". " + team.name + "</div>"
         + "<img id='showCreateProject' class='team-icon' src='/static/images/folder-plus.svg' alt=''>"
         + "<img id='btnDeleteTeam' class='team-icon' src='/static/images/dash-circle-dotted.svg' alt=''>"
@@ -71,8 +71,8 @@ function teamInfo(team, list, i) {
 }
 
 function teamProject(project, list) {
-    list.append("<li style='margin-left: 20px;color: gray' projectId='" + project.projectId + "'><div style='display: inline'>"
-        + project.name + "</div>"
+    list.append("<li class='project-line' projectId='" + project.projectId + "'>"
+        + "<div style='display: inline'>" + project.name + "</div>"
         + "<img id='btnDeleteProject' class='team-icon' src='/static/images/folder-minus.svg' alt=''>"
         + "</li>");
 }

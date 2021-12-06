@@ -3,6 +3,7 @@ import { getUser } from "../crud/userRepository.js";
 import { memberInfo } from "../service/teamService.js";
 import { getProjectById } from "../crud/projectRepository.js";
 import { projectInfo } from "../service/projectService.js";
+import { getTeamById } from "../crud/teamRepository.js";
 
 let team_page = $("#team-page")
 let team_list = $('#team-list')
@@ -17,7 +18,7 @@ $(document).ready(() => {
     })
     // close team list
     team_page.delegate("#closeTeamList", 'click', function () {
-        $("#team-list").hide()
+        team_list.hide()
         $(this).attr('src', '/static/images/caret-down-fill.svg').attr('id', 'showTeamList')
     })
     // show add team div
@@ -76,12 +77,38 @@ $(document).ready(() => {
         projectInfo(id)
         let teamId = getProjectById(id).teamId
         memberInfo(teamId)
-        $('#updateProjectDiv').hide()
-        $('#addTeamDiv').hide()
-        $('#addProjectDiv').hide()
-        $('#task-table').hide()
+        $('#memberListTeamName').empty().append(getTeamById(teamId).name)
+        $('#memberListProjectName').empty().append($(this).text())
+        hideProject()
+        hideTask()
+        $('#userInfo').hide()
         $('#project').fadeIn()
-        $('#add-task-btn').fadeIn()
-        $('#member-list-head').fadeIn()
+        showTask()
+    })
+
+    // show user info
+    $('#showAccount').click(() => {
+        $('#project').hide()
+        hideProject()
+        $('#task').hide()
+        $('#userInfo').fadeIn()
     })
 })
+
+function hideProject() {
+    $('#updateProjectDiv').hide()
+    $('#addTeamDiv').hide()
+    $('#addProjectDiv').hide()
+}
+
+function hideTask() {
+    $('#task-table').hide()
+    $('#addTaskDiv').hide()
+    $('#updateTaskDiv').hide()
+}
+
+function showTask() {
+    $('#task').fadeIn()
+    $('#add-task-btn').fadeIn()
+    $('#member-list-head').fadeIn()
+}

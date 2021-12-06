@@ -21,7 +21,7 @@
 
 .leftBar-btn {
     height: 80px;
-    /*background: linear-gradient(to right, #ED6D2E, #ffffff);*/
+    /*background: linear-gradient(to right, #FDF0EA, #ffffff);*/
     /*border-left: #ED6D2E 4px solid;*/
 }
 
@@ -42,7 +42,7 @@
 }
 
 .main-content {
-    background-color: #fbfefd;
+    background-color: #E0FFFF;
 }
 
 .team-icon{
@@ -59,4 +59,16 @@
     margin-left: 20px;
     width: 20px;
     height: 20px;
+}
+
+.team-list {
+    padding-left: 60px;
+    color: #ABAEAF;
+}
+.team-line {
+    float: left;
+    font-weight: bold;
+}
+.project-line {
+    margin-left: 20px
 }

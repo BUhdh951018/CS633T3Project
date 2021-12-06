@@ -32,8 +32,12 @@
 
 .task {
     margin-top: 40px;
-    background-color: white;
-    padding: 0;
+    /*background-color: white;*/
+    padding: 0 50px;
+}
+
+.task-title {
+    padding-left: 20px;
 }
 
 .line {
@@ -42,7 +46,6 @@
 
 .member {
     margin-top: 40px;
-    background-color: white;
-    padding: 0;
-
+    /*background-color: white;*/
+    padding: 0 40px 0 20px;
 }

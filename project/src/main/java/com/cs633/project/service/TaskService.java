@@ -53,6 +53,8 @@ public class TaskService implements ITaskService {
             return Response.sendErrorMessage(CommonConstant.ERROR_TASK_NOT_EXIST, "updateTask");
         }
 
+        // todo only task owner and requester can change
+
         Task task = optionalTask.get();
         if (!name.isBlank()) {
             task.setName(name);
@@ -87,6 +89,8 @@ public class TaskService implements ITaskService {
             return Response.sendErrorMessage(CommonConstant.ERROR_TASK_NOT_EXIST, "deleteTask");
         }
         Task task = optionalTask.get();
+
+        // todo only owner can do
 
         Optional<Project> optionalProject = dataBus.projectRepository().findById(task.getProjectId());
         if (optionalProject.isEmpty()) {
