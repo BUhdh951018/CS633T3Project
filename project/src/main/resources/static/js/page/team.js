@@ -31,7 +31,6 @@ $(document).ready(() => {
         $('#task').fadeIn()
         $("#addTeamDiv").fadeIn()
         $("#addTeamDiv #project-username").empty().append(getUser().username)
-        // todo change back color
     })
     // close add team div
     team_page.delegate("#closeAddTeamDiv", 'click', function () {

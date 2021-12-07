@@ -117,10 +117,21 @@ public class TeamService implements ITeamService {
             return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember", "team not exist");
         }
 
-        // todo not leader
-
         User member = optionalMember.get();
+
         Team team = optionalTeam.get();
+        if (memberId.equals(team.getOwnerId())) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
+                    "you are team owner can't delete yourself");
+        }
+
+        if (!memberId.equals(team.getOwnerId())) {
+            if (!user.getId().equals(memberId)) {
+                return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
+                        "you are not the owner of the team, can't delete other member");
+            }
+        }
+
         if (!isMember(member, team)) {
             return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
                     "member not exist in this team");

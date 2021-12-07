@@ -47,7 +47,7 @@ function taskList(task) {
     task.forEach(element => {
         task_list.append(
             "<button taskid='" + element.taskId +"' id='showAddTask' class='task-btn btn'>"
-            + "<img class='task-icon' src='/static/images/card-checklist.svg' alt=''>"
+            + "<img class='task-icon' src='/static/images/" + randomIcon(i) + ".svg' alt=''>"
             + "<br>"
             + "Task" + i
             + "<br>"
@@ -56,6 +56,18 @@ function taskList(task) {
         )
         i++
     })
+}
+
+function randomIcon(i) {
+    if (i % 4 === 0) {
+        return 'bar-chart-line'
+    } else if (i % 4 === 1) {
+        return 'graph-up-arrow'
+    } else if (i % 4 === 2) {
+        return 'journal'
+    } else {
+        return 'layout-text-sidebar-reverse'
+    }
 }
 
 function taskInfo(task) {

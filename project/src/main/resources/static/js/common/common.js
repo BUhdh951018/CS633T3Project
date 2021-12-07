@@ -135,7 +135,6 @@ function showTask() {
     $('#member-list-head').fadeIn()
 }
 
-// todo btn back fuc
 function changeBack(type) {
     if (type === 'team') {
         $('#showAccount').removeClass('btn-change')

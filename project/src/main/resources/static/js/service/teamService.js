@@ -1,5 +1,5 @@
 import { getTeamInfo } from "../action/teamAction.js";
-import { deleteTeamById, getAllTeam, saveTeamInfo, updateTeamInfo } from "../crud/teamRepository.js";
+import { deleteTeamById, getAllTeam, getTeamById, saveTeamInfo, updateTeamInfo } from "../crud/teamRepository.js";
 import { logInfo } from "../common/common.js";
 import { getAllProject, getProjectByTeamId } from "../crud/projectRepository.js";
 import { getAllTask } from "../crud/taskRepository.js";
@@ -81,19 +81,29 @@ function memberInfo(id) {
     let temp_member = getMemberByTeamId(id);
     member_list.empty();
     member_list.attr('teamid', id);
+    let team = getTeamById(id)
     temp_member.forEach(element => {
-        member_list.append(getMemberInfoIcon(element))
+        let type
+        if (element.id === team.ownerId) {
+            type = 'owner'
+        }
+        member_list.append(getMemberInfoIcon(element, type))
     })
 
 }
 
-function getMemberInfoIcon(user) {
-    return "<div class='member-profile'>"
-        + "<img class='member-icon-big' src='/static/images/person-circle.svg' alt=''>"
-        + user.username
+function getMemberInfoIcon(user, type) {
+    let content = "<div class='member-profile'>"
+    if (type === 'owner') {
+        content += "<img class='member-icon-big' src='/static/images/person-circle.svg' alt=''>"
+    } else {
+        content += "<img class='member-icon-big' src='/static/images/person-fill.svg' alt=''>"
+    }
+    content += user.username
         + "<img id='btnDeleteMember' userid='" + user.id + "' "
         + "src='/static/images/dash-circle-fill.svg' class='member-icon-sm' alt=''>"
         + "</div>"
+    return content
 }
 
 export { updateTeamService, teamService, deleteTeamService, setTeamList }

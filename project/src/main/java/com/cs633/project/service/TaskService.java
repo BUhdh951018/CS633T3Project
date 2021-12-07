@@ -53,9 +53,12 @@ public class TaskService implements ITaskService {
             return Response.sendErrorMessage(CommonConstant.ERROR_TASK_NOT_EXIST, "updateTask");
         }
 
-        // todo only task owner and requester can change
-
         Task task = optionalTask.get();
+        if (!user.getId().equals(task.getOwnerId()) || !user.getId().equals(task.getRequesterId())) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "updateTask",
+                    "only requester and owner can change the task!");
+        }
+
         if (!name.isBlank()) {
             task.setName(name);
         }
@@ -90,7 +93,10 @@ public class TaskService implements ITaskService {
         }
         Task task = optionalTask.get();
 
-        // todo only owner can do
+        if (!user.getId().equals(task.getOwnerId())) {
+            return  Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "deleteTask",
+                    "only owner can delete task!");
+        }
 
         Optional<Project> optionalProject = dataBus.projectRepository().findById(task.getProjectId());
         if (optionalProject.isEmpty()) {

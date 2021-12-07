@@ -1,9 +1,10 @@
 .task-btn {
     background-color: #FDF0EA;
     color: #ED6D2E;
-    width: 130px;
+    width: 140px;
     height: 150px;
     margin: 10px 10px 0 0;
+    border-radius: 20px;
 }
 
 .task-icon {
