@@ -4,7 +4,10 @@ import { memberInfo } from "../service/teamService.js";
 import { getProjectById } from "../crud/projectRepository.js";
 import { projectInfo } from "../service/projectService.js";
 import { getTeamById } from "../crud/teamRepository.js";
-import { changeBack, hideForNew, hideProject, hideTask, showTask } from "../common/common.js";
+import {
+    changeBack, cleanProject, hideForNew, hideProject, hideTask,
+    initShowAddMember, initShowAddProject, initShowAddTeam, showTask
+} from "../common/common.js";
 
 let team_page = $("#team-page")
 let team_list = $('#team-list')
@@ -34,8 +37,7 @@ $(document).ready(() => {
     })
     // close add team div
     team_page.delegate("#closeAddTeamDiv", 'click', function () {
-        $(this).attr('id', 'showAddTeamDiv')
-        $("#addTeamDiv").hide()
+        initShowAddTeam()
         changeBack('')
         $("#project").fadeIn()
     })
@@ -43,14 +45,14 @@ $(document).ready(() => {
     $("#createTeamBtn").click(() => {
         let name = $("#createTeamInput").val()
         createTeam(name)
-        $('#closeAddTeamDiv').attr('id', 'showAddTeamDiv')
-        $("#addTeamDiv").hide()
+        initShowAddTeam()
         $("#project").fadeIn()
     })
     // delete team
     team_page.delegate("#btnDeleteTeam", 'click', function () {
         let teamId = $(this).parent().attr('teamid')
         deleteTeam(teamId)
+        cleanProject(teamId)
     })
     //show add member div
     member_list_head.delegate('#showAddMemberDiv', 'click', function () {
@@ -59,17 +61,15 @@ $(document).ready(() => {
     })
     // close add member div
     member_list_head.delegate('#closeAddMemberDiv', 'click', function () {
-        $(this).attr('id', 'showAddMemberDiv')
-        $('#addMemberDiv').hide()
+        initShowAddMember()
     })
     // add member
     $('#addMemberBtn').click(() => {
         let memberId = $('#addMemberInput').val()
         addMember(memberId, $('#member-list').attr('teamid'))
-        $('#closeAddMemberDiv').attr('id', 'showAddMemberDiv')
-        $('#addMemberDiv').hide()
+        initShowAddMember()
     })
-    //delete member
+    // delete member
     $('#member-list').delegate('#btnDeleteMember', 'click', function () {
         let teamId = $('#member-list').attr('teamid')
         deleteMember(teamId, $(this).attr('userid'))
@@ -83,6 +83,7 @@ $(document).ready(() => {
         memberInfo(teamId)
         $('#memberListTeamName').empty().append(getTeamById(teamId).name)
         $('#memberListProjectName').empty().append($(this).text())
+        initShowAddMember()
         hideProject()
         hideTask()
         $('#userInfo').hide()

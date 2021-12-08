@@ -105,22 +105,23 @@ function hideForNew(type) {
     $("#project").hide()
     $('#userInfo').hide()
     hideTask()
-    $('#add-task-btn').hide()
+    $('#taskDiv').hide()
     $('#memberListProjectName').empty().append('Project')
     if (type === 'team') {
-        $('#addProjectDiv').hide()
+        initShowAddProject()
         $('#member-list-head').hide()
         $('#member-list').empty()
         $('#memberListTeamName').empty().append('Team')
+        initShowAddMember()
     } else {
-        $('#addTeamDiv').hide()
+        initShowAddTeam()
     }
 }
 
 function hideProject() {
     $('#updateProjectDiv').hide()
-    $('#addTeamDiv').hide()
-    $('#addProjectDiv').hide()
+    initShowAddTeam()
+    initShowAddProject()
 }
 
 function hideTask() {
@@ -131,7 +132,7 @@ function hideTask() {
 
 function showTask() {
     $('#task').fadeIn()
-    $('#add-task-btn').fadeIn()
+    $('#taskDiv').fadeIn()
     $('#member-list-head').fadeIn()
 }
 
@@ -148,6 +149,30 @@ function changeBack(type) {
     }
 }
 
+function initShowAddTeam() {
+    $('#closeAddTeamDiv').attr('id', 'showAddTeamDiv')
+    $("#addTeamDiv").hide()
+}
+
+function initShowAddProject() {
+    $('#closeCreateProject').attr('id', 'showCreateProject')
+    $("#addProjectDiv").hide()
+}
+
+function initShowAddMember() {
+    $('#closeAddMemberDiv').attr('id', 'showAddMemberDiv')
+    $('#addMemberDiv').hide()
+}
+
+function cleanProject(teamId) {
+    if (teamId === Number($('#member-list').attr('teamid'))) {
+        hideProject()
+        hideTask()
+    }
+}
+
 export { logInfo, getUsername, getCorrectDate, getQueryString }
 export { checkMember, checkStatus, checkDate, checkComplex, checkMemberId }
 export { hideForNew, hideProject, hideTask, showTask, changeBack }
+export { initShowAddTeam, initShowAddProject, initShowAddMember }
+export { cleanProject }

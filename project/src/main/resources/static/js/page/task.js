@@ -12,7 +12,7 @@ let updateTable = $('#update-table')
 $(document).ready(() => {
     // show add task div
     $('#showAddTask').click(() => {
-        $('#add-task-btn').hide()
+        $('#taskDiv').hide()
         let teamId = $('#member-list').attr('teamid')
         addOwnerRequester(getMemberByTeamId(teamId))
         $('#addTaskDiv').fadeIn()
@@ -22,7 +22,7 @@ $(document).ready(() => {
         let id = $('#show-project-name').attr('projectid')
         createTask(id)
         $('#addTaskDiv').hide()
-        $('#add-task-btn').fadeIn()
+        $('#taskDiv').fadeIn()
     })
     // show detail
     task_list.delegate('button', 'click', function () {
@@ -33,7 +33,7 @@ $(document).ready(() => {
     })
     // show update div
     taskTable.delegate('#showUpdateTaskDiv', 'click', function () {
-        $('#add-task-btn').hide()
+        $('#taskDiv').hide()
         $('#updateTaskDiv').fadeIn()
         let taskId = $(this).parent().parent().attr('taskid')
         updateTaskTable(taskId)
@@ -44,7 +44,7 @@ $(document).ready(() => {
         let teamId = $('#update-table tr').attr('teamid')
         updateTask(taskId, teamId)
         $('#updateTaskDiv').hide()
-        $('#add-task-btn').fadeIn()
+        $('#taskDiv').fadeIn()
     })
     // update status
     taskTable.delegate('#btnUpdateStatus', 'click', function () {
