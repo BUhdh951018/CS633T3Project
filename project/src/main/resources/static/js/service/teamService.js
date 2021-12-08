@@ -1,6 +1,6 @@
 import { getTeamInfo } from "../action/teamAction.js";
 import { deleteTeamById, getAllTeam, getTeamById, saveTeamInfo, updateTeamInfo } from "../crud/teamRepository.js";
-import { logInfo } from "../common/common.js";
+import { hideProject, hideTask, logInfo } from "../common/common.js";
 import { getAllProject, getProjectByTeamId } from "../crud/projectRepository.js";
 import { getAllTask } from "../crud/taskRepository.js";
 import { setCurrentProject } from "./projectService.js";
@@ -89,7 +89,6 @@ function memberInfo(id) {
         }
         member_list.append(getMemberInfoIcon(element, type))
     })
-
 }
 
 function getMemberInfoIcon(user, type) {

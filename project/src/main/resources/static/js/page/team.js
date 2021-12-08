@@ -5,7 +5,7 @@ import { getProjectById } from "../crud/projectRepository.js";
 import { projectInfo } from "../service/projectService.js";
 import { getTeamById } from "../crud/teamRepository.js";
 import {
-    changeBack, cleanProject, hideForNew, hideProject, hideTask,
+    changeBack, cleanProject, deleteItem, hideForNew, hideProject, hideTask,
     initShowAddMember, initShowAddProject, initShowAddTeam, showTask
 } from "../common/common.js";
 
@@ -51,8 +51,8 @@ $(document).ready(() => {
     // delete team
     team_page.delegate("#btnDeleteTeam", 'click', function () {
         let teamId = $(this).parent().attr('teamid')
+        deleteItem(teamId, 'team')
         deleteTeam(teamId)
-        cleanProject(teamId)
     })
     //show add member div
     member_list_head.delegate('#showAddMemberDiv', 'click', function () {
@@ -65,15 +65,19 @@ $(document).ready(() => {
     })
     // add member
     $('#addMemberBtn').click(() => {
-        let memberId = $('#addMemberInput').val()
-        addMember(memberId, $('#member-list').attr('teamid'))
+        let name = $('#addMemberInput').val()
+        addMember(name, $('#member-list').attr('teamid'))
         initShowAddMember()
     })
     // delete member
     $('#member-list').delegate('#btnDeleteMember', 'click', function () {
         let teamId = $('#member-list').attr('teamid')
-        deleteMember(teamId, $(this).attr('userid'))
-        memberInfo(teamId)
+        let memberId = $(this).attr('userid')
+        let flag = deleteSelf(memberId, teamId)
+        deleteMember(teamId, memberId)
+        if (!flag) {
+            memberInfo(teamId)
+        }
     })
     // select project
     team_list.delegate('li div', 'click', function () {
@@ -101,3 +105,13 @@ $(document).ready(() => {
         $('#userInfo').fadeIn()
     })
 })
+
+function deleteSelf(memberId, teamId) {
+    let userId = getUser().id
+    if (Number(memberId) === userId) {
+        deleteItem(teamId, 'team')
+        return true
+    }
+
+    return false
+}

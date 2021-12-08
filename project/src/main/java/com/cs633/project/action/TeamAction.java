@@ -65,13 +65,13 @@ public class TeamAction {
 
     public JSONObject addMember(JSONObject object) {
         Long teamId = object.getLong("teamId");
-        Long memberId = object.getLong("memberId");
+        String memberName = object.getString("memberName");
 
-        if (teamId == null || memberId == null) {
+        if (teamId == null || memberName == null) {
             return Response.sendErrorMessage(CommonConstant.ERROR_INPUT_EMPTY, "addMember");
         }
 
-        return dataBus.teamService().addMember(GetCurrentUser.getUser(object), teamId, memberId);
+        return dataBus.teamService().addMember(GetCurrentUser.getUser(object), teamId, memberName);
     }
 
     public JSONObject deleteMember(JSONObject object) {

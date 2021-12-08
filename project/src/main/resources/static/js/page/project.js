@@ -1,6 +1,6 @@
 import { createProject, deleteProject, updateProject } from "../action/projectAction.js";
 import { getUser } from "../crud/userRepository.js";
-import { cleanProject, hideForNew, initShowAddProject, showTask } from "../common/common.js";
+import { deleteItem, hideForNew, initShowAddProject, showTask } from "../common/common.js";
 import { getTeamById } from "../crud/teamRepository.js";
 import { memberInfo } from "../service/teamService.js";
 import { getProjectById } from "../crud/projectRepository.js";
@@ -58,7 +58,7 @@ $(document).ready(() => {
     // delete project
     team_page.delegate('#btnDeleteProject', 'click', function () {
         let id = $(this).parent().attr('projectid')
-        cleanProject(getProjectById(id).teamId)
+        deleteItem(getProjectById(id).teamId)
         deleteProject(id)
     })
 })

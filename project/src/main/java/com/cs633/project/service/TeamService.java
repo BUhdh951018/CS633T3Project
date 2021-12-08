@@ -1,5 +1,6 @@
 package com.cs633.project.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cs633.project.IDataBus;
@@ -78,16 +79,16 @@ public class TeamService implements ITeamService {
     }
 
     @Override
-    public JSONObject addMember(User user, Long teamId, Long memberId) {
-        if (memberId.equals(user.getId())) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
-                    "can't add yourself");
-        }
-
-        Optional<User> optionalMember = dataBus.userRepository().findById(memberId);
-        if (optionalMember.isEmpty()) {
+    public JSONObject addMember(User user, Long teamId, String memberName) {
+        User member = dataBus.userRepository().findByUsername(memberName);
+        if (member == null) {
             return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
                     "member not exist");
+        }
+
+        if (member.getId().equals(user.getId())) {
+            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
+                    "can't add yourself");
         }
 
         Optional<Team> optionalTeam = dataBus.teamRepository().findById(teamId);
@@ -97,7 +98,6 @@ public class TeamService implements ITeamService {
         }
 
         Team team = optionalTeam.get();
-        User member = optionalMember.get();
         if (isMember(member, team)) {
             return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
                     "already been member");
@@ -105,7 +105,7 @@ public class TeamService implements ITeamService {
 
         member.addTeam(teamId);
         dataBus.userRepository().save(member);
-        team.addMember(memberId);
+        team.addMember(member.getId());
         team = dataBus.teamRepository().save(team);
         return Response.sendBody("addMember", JSONUtil.createTeam(team));
     }
@@ -150,6 +150,10 @@ public class TeamService implements ITeamService {
         dataBus.userRepository().save(member);
         team.deleteMember(memberId);
         team = dataBus.teamRepository().save(team);
+
+        if (user.getId().equals(memberId)) {
+            return Response.sendBody("deleteTeam", JSONUtil.deleteItem(teamId));
+        }
 
         return Response.sendBody("deleteMember", JSONUtil.createTeam(team));
     }

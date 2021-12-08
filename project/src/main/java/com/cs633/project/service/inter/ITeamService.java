@@ -16,7 +16,7 @@ public interface ITeamService {
     JSONObject createTeam(User user, String name);
     JSONObject getTeamInfo(User user);
     JSONObject deleteTeam(User user, Long teamId);
-    JSONObject addMember(User user, Long teamId, Long memberId);
+    JSONObject addMember(User user, Long teamId, String memberName);
     JSONObject deleteMember(User user, Long teamId, Long memberId);
     Boolean isMember(User member, Team team);
 

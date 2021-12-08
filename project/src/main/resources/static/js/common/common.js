@@ -136,6 +136,20 @@ function showTask() {
     $('#member-list-head').fadeIn()
 }
 
+function deleteItem(teamId, type) {
+    if (Number(teamId) === Number($('#member-list').attr('teamid'))) {
+        $('#taskDiv').hide()
+        $('#show-project-name').empty()
+        $('#show-project-des').empty()
+        $('#memberListProjectName').empty().append('Project')
+        if (type === 'team') {
+            $('#memberListTeamName').empty().append('Team')
+            $('#member-list-head').hide()
+            $('#member-list').empty()
+        }
+    }
+}
+
 function changeBack(type) {
     if (type === 'team') {
         $('#showAccount').removeClass('btn-change')
@@ -175,4 +189,4 @@ export { logInfo, getUsername, getCorrectDate, getQueryString }
 export { checkMember, checkStatus, checkDate, checkComplex, checkMemberId }
 export { hideForNew, hideProject, hideTask, showTask, changeBack }
 export { initShowAddTeam, initShowAddProject, initShowAddMember }
-export { cleanProject }
+export { cleanProject, deleteItem }
