@@ -79,23 +79,27 @@ public class TeamService implements ITeamService {
     @Override
     public JSONObject addMember(User user, Long teamId, Long memberId) {
         if (memberId.equals(user.getId())) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember", "can't add yourself");
+            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
+                    "can't add yourself");
         }
 
         Optional<User> optionalMember = dataBus.userRepository().findById(memberId);
         if (optionalMember.isEmpty()) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember", "member not exist");
+            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
+                    "member not exist");
         }
 
         Optional<Team> optionalTeam = dataBus.teamRepository().findById(teamId);
         if (optionalTeam.isEmpty()) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember", "team not exist");
+            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
+                    "team not exist");
         }
 
         Team team = optionalTeam.get();
         User member = optionalMember.get();
         if (isMember(member, team)) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember", "already been member");
+            return Response.sendErrorMessage(CommonConstant.ERROR_ADD_MEMBER, "addMember",
+                    "already been member");
         }
 
         member.addTeam(teamId);
@@ -109,23 +113,27 @@ public class TeamService implements ITeamService {
     public JSONObject deleteMember(User user, Long teamId, Long memberId) {
         Optional<User> optionalMember = dataBus.userRepository().findById(memberId);
         if (optionalMember.isEmpty()) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember", "member not exist");
+            return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
+                    "member not exist");
         }
 
         Optional<Team> optionalTeam = dataBus.teamRepository().findById(teamId);
         if (optionalTeam.isEmpty()) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember", "team not exist");
+            return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
+                    "team not exist");
         }
 
         User member = optionalMember.get();
 
         Team team = optionalTeam.get();
-        if (memberId.equals(team.getOwnerId())) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
-                    "you are team owner can't delete yourself");
+        if (user.getId().equals(memberId)) {
+            if (memberId.equals(team.getOwnerId())) {
+                return Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "deleteMember",
+                        "you are team owner can't delete yourself");
+            }
         }
 
-        if (!memberId.equals(team.getOwnerId())) {
+        if (!user.getId().equals(team.getOwnerId())) {
             if (!user.getId().equals(memberId)) {
                 return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
                         "you are not the owner of the team, can't delete other member");

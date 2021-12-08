@@ -54,7 +54,7 @@ public class TaskService implements ITaskService {
         }
 
         Task task = optionalTask.get();
-        if (!user.getId().equals(task.getOwnerId()) || !user.getId().equals(task.getRequesterId())) {
+        if (!user.getId().equals(task.getOwnerId()) && !user.getId().equals(task.getRequesterId())) {
             return Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "updateTask",
                     "only requester and owner can change the task!");
         }
@@ -93,9 +93,9 @@ public class TaskService implements ITaskService {
         }
         Task task = optionalTask.get();
 
-        if (!user.getId().equals(task.getOwnerId())) {
+        if (!user.getId().equals(task.getRequesterId())) {
             return  Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "deleteTask",
-                    "only owner can delete task!");
+                    "only requester can delete task!");
         }
 
         Optional<Project> optionalProject = dataBus.projectRepository().findById(task.getProjectId());
