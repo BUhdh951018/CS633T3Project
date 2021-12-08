@@ -102,6 +102,7 @@ public class TaskService implements ITaskService {
         if (optionalProject.isEmpty()) {
             return Response.sendErrorMessage(CommonConstant.ERROR_PROJECT_NOT_EXIST, "deleteTask");
         }
+
         Project project = optionalProject.get();
         project.deleteTask(taskId);
         dataBus.projectRepository().save(project);
@@ -114,9 +115,15 @@ public class TaskService implements ITaskService {
     public JSONObject updateTaskStatus(User user, Long taskId, Integer status) {
         Optional<Task> optionalTask = dataBus.taskRepository().findById(taskId);
         if (optionalTask.isEmpty()) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_TASK_NOT_EXIST, "deleteTask");
+            return Response.sendErrorMessage(CommonConstant.ERROR_TASK_NOT_EXIST, "updateTaskStatus");
         }
+
         Task task = optionalTask.get();
+        if (!user.getId().equals(task.getOwnerId())) {
+            return  Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "updateTaskStatus",
+                    "only owner can update the status!");
+        }
+
         task.setStatus(status);
         task = dataBus.taskRepository().save(task);
         return Response.sendBody("updateTaskStatus", JSONUtil.createTask(task));

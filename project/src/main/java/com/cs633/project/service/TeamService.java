@@ -60,7 +60,8 @@ public class TeamService implements ITeamService {
         }
         Team team = optionalTeam.get();
         if (!team.getOwnerId().equals(user.getId())) {
-            return Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "deleteTeam", "not team owner");
+            return Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "deleteTeam",
+                    "not team owner");
         }
 
         for (Long id : team.getMemberList()) {
@@ -135,7 +136,7 @@ public class TeamService implements ITeamService {
 
         if (!user.getId().equals(team.getOwnerId())) {
             if (!user.getId().equals(memberId)) {
-                return Response.sendErrorMessage(CommonConstant.ERROR_DELETE_MEMBER, "deleteMember",
+                return Response.sendErrorMessage(CommonConstant.ERROR_PERMISSION_DENIED, "deleteMember",
                         "you are not the owner of the team, can't delete other member");
             }
         }
