@@ -4,14 +4,18 @@ import { getUsername, checkMemberId } from "../common/common.js";
 function createTask(projectId) {
     let name = $('#task-name').val();
     let content = $('#task-content').val();
-    let ownerId = $('#task-owner').val()
-    let requesterId = $('#task-requester').val()
+    let teamId = $('#member-list').attr('teamid')
+    let owner = $('#task-owner').val()
+    let ownerId = checkMemberId(owner, teamId)
+    let requester = $('#task-requester').val()
+    let requesterId = checkMemberId(requester, teamId)
     let start = $('#task-start').val()
     let end = $('#task-end').val()
     let complexity = $('#task-complex').val()
 
     let message = {"cmd": "createTask",
-        "message": {"projectId": projectId, "name": name, "content": content, "ownerId": ownerId, "requesterId": requesterId, "start": start,
+        "message": {"projectId": projectId, "name": name, "content": content, "ownerId": ownerId,
+            "requesterId": requesterId, "start": start,
             "end": end, "complexity": complexity, "username": getUsername()}}
     socketSend(message)
 }

@@ -93,7 +93,7 @@ function getMemberByName(name, teamId) {
     team.forEach(element => {
         if (element.teamId === Number(teamId)) {
             element.members.forEach(member => {
-                if (member.name === name.toString()) {
+                if (member.username === name.toString()) {
                     userId = member.id
                 }
             })
